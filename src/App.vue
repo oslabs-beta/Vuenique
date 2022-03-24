@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import HelloWorld from "./components/HelloWorld.vue";
 import TheWelcome from "./components/TheWelcome.vue";
+import Bar from "../packages/vuez-shape/Bar.vue";
 </script>
 
 <template>
@@ -19,7 +20,7 @@ import TheWelcome from "./components/TheWelcome.vue";
   </header>
 
   <main>
-    <TheWelcome />
+    <Bar className="vuez-rect" width="100" height="100" fill="green" />
   </main>
 </template>
 
