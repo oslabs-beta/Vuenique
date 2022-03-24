@@ -2,6 +2,8 @@
 import HelloWorld from "./components/HelloWorld.vue";
 import TheWelcome from "./components/TheWelcome.vue";
 import Bar from "../packages/vuez-shape/Bar.vue";
+import Group from "../packages/vuez-group/Group.vue";
+const testArr = [1, 2, 3, 4, 5];
 </script>
 
 <template>
@@ -20,7 +22,16 @@ import Bar from "../packages/vuez-shape/Bar.vue";
   </header>
 
   <main>
-    <Bar className="vuez-rect" width="100" height="100" fill="green" />
+    <Group transform="translate(50, 50)" :top="25" :left="25">
+      <Bar
+        v-for="num in testArr"
+        :key="num"
+        className="vuez-rect"
+        width="100"
+        height="100"
+        fill="green"
+      />
+    </Group>
   </main>
 </template>
 
