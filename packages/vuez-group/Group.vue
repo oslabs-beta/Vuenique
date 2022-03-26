@@ -30,7 +30,6 @@ const groupProps = withDefaults(defineProps<GroupProps>(), {
 </script>
 
 <template>
-  <svg>
     <!-- $attrs handle additional props not explicity defined in the interface GroupProps -->
     <g
       :ref="groupProps.innerRef"
@@ -41,5 +40,4 @@ const groupProps = withDefaults(defineProps<GroupProps>(), {
       <!-- slot renders children passed within the Group component -->
       <slot />
     </g>
-  </svg>
 </template>
