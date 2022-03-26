@@ -3,7 +3,7 @@ import { scaleBand } from "d3-scale";
 // import { PickScaleConfigWithoutType } from '../types/ScaleConfig';
 import scaleOperator from '../operators/scaleOperator';
 
-export const updateBandScale = scaleOperator<'band'>(
+export const updateBandScale = scaleOperator(
   'domain',
   'range',
   'reverse',
@@ -12,11 +12,9 @@ export const updateBandScale = scaleOperator<'band'>(
   'round',
 );
 
-let a = 1;
-a = "hi";
 
-export function createBandScale<DiscreteInput extends StringLike = StringLike>(config) {
-  return updateBandScale(scaleBand<DiscreteInput>(), config);
+export default function createBandScale(config?: any) {
+  return updateBandScale(scaleBand(), config);
 }
 
 

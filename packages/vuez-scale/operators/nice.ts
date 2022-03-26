@@ -13,18 +13,16 @@ import {
   utcWeek,
   utcMonth,
   utcYear,
-  CountableTimeInterval,
+  // CountableTimeInterval,
 } from 'd3-time';
-import { ScaleTime } from 'd3-scale';
-import { StringLike } from '../types/Base';
-import { DefaultThresholdInput, D3Scale } from '../types/Scale';
-import { ScaleConfigWithoutType } from '../types/ScaleConfig';
-import { NiceTime } from '../types/Nice';
+// import { ScaleTime } from 'd3-scale';
+// import { StringLike } from '../types/Base';
+// import { DefaultThresholdInput, D3Scale } from '../types/Scale';
+// import { ScaleConfigWithoutType } from '../types/ScaleConfig';
+// import { NiceTime } from '../types/Nice';
 import isUtcScale from '../utils/isUtcScale';
 
-const localTimeIntervals: {
-  [key in NiceTime]: CountableTimeInterval;
-} = {
+const localTimeIntervals = {
   day: timeDay,
   hour: timeHour,
   minute: timeMinute,
@@ -34,9 +32,7 @@ const localTimeIntervals: {
   year: timeYear,
 };
 
-const utcIntervals: {
-  [key in NiceTime]: CountableTimeInterval;
-} = {
+const utcIntervals = {
   day: utcDay,
   hour: utcHour,
   minute: utcMinute,
@@ -46,14 +42,7 @@ const utcIntervals: {
   year: utcYear,
 };
 
-export default function applyNice<
-  Output,
-  DiscreteInput extends StringLike,
-  ThresholdInput extends DefaultThresholdInput,
->(
-  scale: D3Scale<Output, DiscreteInput, ThresholdInput>,
-  config: ScaleConfigWithoutType<Output, DiscreteInput, ThresholdInput>,
-) {
+export default function applyNice (scale: any, config: any,) {
   if ('nice' in config && typeof config.nice !== 'undefined' && 'nice' in scale) {
     const { nice } = config;
     if (typeof nice === 'boolean') {
@@ -63,7 +52,7 @@ export default function applyNice<
     } else if (typeof nice === 'number') {
       scale.nice(nice);
     } else {
-      const timeScale = scale as ScaleTime<Output, Output>;
+      const timeScale = scale;
       const isUtc = isUtcScale(timeScale);
       if (typeof nice === 'string') {
         timeScale.nice(isUtc ? utcIntervals[nice] : localTimeIntervals[nice]);
@@ -73,7 +62,7 @@ export default function applyNice<
           isUtc ? utcIntervals[interval] : localTimeIntervals[interval]
         ).every(step);
         if (parsedInterval != null) {
-          timeScale.nice(parsedInterval as CountableTimeInterval);
+          timeScale.nice(parsedInterval);
         }
       }
     }

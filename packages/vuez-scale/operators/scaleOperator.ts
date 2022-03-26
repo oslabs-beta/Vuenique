@@ -34,12 +34,12 @@ export const ALL_OPERATORS = [
 
   // Order does not matter for these operators
   'align',
-  'base',
+  // 'base',
   'clamp',
-  'constant',
-  'exponent',
+  // 'constant',
+  // 'exponent',
   'padding',
-  'unknown',
+  // 'unknown',
 ] as const;
 
 // typeof ALL_OPERATORS = Array<'domain'| ...>
@@ -55,32 +55,25 @@ const operators: Record<OperatorType, typeof domain> = {
   interpolate,
   round,
   align,
-  base,
+  // base,
   clamp,
-  constant,
-  exponent,
+  // constant,
+  // exponent,
   padding,
   range,
   reverse,
-  unknown,
+  // unknown,
 };
 
 
-export default function scaleOperator<T extends ScaleType>(...ops: OperatorType[]) {
+export default function scaleOperator(...ops: OperatorType[]) {
   const selection = new Set(ops);
   const selectedOps = ALL_OPERATORS.filter((o) => selection.has(o));
 
-  return function applyOperators<
-    Output = DefaultOutput,
-    DiscreteInput extends StringLike = StringLike,
-    ThresholdInput extends DefaultThresholdInput = DefaultThresholdInput,
-  >(
-    scale: PickD3Scale<T, Output, DiscreteInput, ThresholdInput>,
-    config?: PickScaleConfigWithoutType<T, Output, DiscreteInput, ThresholdInput>,
-  ) {
+  return function applyOperators(scale: any, config?: any) {
     if (typeof config !== 'undefined') {
       selectedOps.forEach((op) => {
-        operators[op]<Output, DiscreteInput, ThresholdInput>(scale, config);
+        operators[op](scale, config);
       });
     }
 
