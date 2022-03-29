@@ -1,12 +1,10 @@
 <script setup lang="tsx">
-import HelloWorld from "./components/HelloWorld.vue";
-import TheWelcome from "./components/TheWelcome.vue";
 import Bar from "../packages/vuez-shape/Bar.vue";
 import Group from "../packages/vuez-group/Group.vue";
 import { scaleBand, scaleLinear } from "../packages/vuez-scale/index";
-import { h } from "vue";
+import {  ref, computed, Ref, reactive} from "vue";
 
-const data = [
+const data = reactive([
   { letter: 'A', frequency: 0.08167 },
   { letter: 'B', frequency: 0.01492 },
   { letter: 'C', frequency: 0.02782 },
@@ -33,80 +31,66 @@ const data = [
   { letter: 'X', frequency: 0.0015 },
   { letter: 'Y', frequency: 0.01974 },
   { letter: 'Z', frequency: 0.00074 },
-];
+]);
+// console.log(data)
 
 const getLetter = (d) => d.letter;
 const getLetterFrequency = (d) => Number(d.frequency) * 100;
 
-const xMax = 400;
-const yMax = 400;
-const xScale = scaleBand({
-  range: [0, xMax],
+
+
+const xMax: Ref<number> = ref(400);
+const yMax: Ref<number> = ref(400);
+
+const xScale = computed(() => {
+  return scaleBand({
+  range: [0, xMax.value ? xMax.value : 400],
   round: true,
   domain: data.map(getLetter),
   padding: 0.4,
-});
+  })
+})
 
-const yScale = scaleLinear({
-  range: [yMax, 0],
+
+const yScale = computed(() => { 
+  return scaleLinear({
+  range: [yMax.value, 0],
   round: true,
   domain: [0, Math.max(...data.map(getLetterFrequency))],
+  })
 })
-const render = () => {
-  return (
-    <svg width={400} height={400}>
-      <rect width={400} height={400} fill="url(#teal)" rx={14} />
-      <Group>
-        {data.map((d) => {
-          const letter = getLetter(d);
-          const barWidth = xScale.bandwidth();
-          const barHeight = yMax - (yScale(getLetterFrequency(d)) ?? 0);
-          const barX = xScale(letter);
-          const barY = yMax - barHeight;
-          return (
-            <Bar
-              key={`bar-${letter}`}
-              x={barX}
-              y={barY}
-              width={barWidth}
-              height={barHeight}
-              fill="rgba(23, 233, 217, .5)"
-            />
-          );
-        })}
-      </Group>
-    </svg>
-  )
-}
+//barsUpdated = ref([{},{}])
+const barsUpdated = computed(() => {
+  let id = 0;
+  return data.map((d) => {
+   const letter = getLetter(d);
+   const barWidth = xScale.value.bandwidth();
+   const barHeight = yMax.value - (yScale.value(getLetterFrequency(d)) ?? 0);
+   const barX = xScale.value(letter);
+   const barY = yMax.value - barHeight;
+   return { letter: letter, barWidth: barWidth, barHeight: barHeight, barX: barX, barY: barY, key: id++}
+   })
+})
+// console.log(barsUpdated)
+
+
 </script>
 
 <template>
-  <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="./assets/logo.svg"
-      width="125"
-      height="125"
-    />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
   <main>
-    <!-- <Group transform="translate(50, 50)" :top="25" :left="25">
-      <Bar
-        v-for="num in testArr"
-        :key="num"
-        className="vuez-rect"
-        width="100"
-        height="100"
-        fill="green"
-      />
-    </Group> -->
-    <render />
+   <input v-model="xMax" type="text">
+   <svg :width="xMax ? xMax : 400" :height="yMax">
+      <rect :width="xMax ? xMax : 400" :height="yMax" fill="url(#teal)" rx="14" />
+      <Group>
+            <Bar v-for="bars in barsUpdated" :key="bars.key"
+              :x="bars.barX"
+              :y="bars.barY"
+              :width="bars.barWidth"
+              :height="bars.barHeight"
+              fill="rgba(23, 233, 217, .5)"
+            />
+      </Group>
+    </svg>
   </main>
 </template>
 
