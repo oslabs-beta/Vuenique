@@ -1,13 +1,16 @@
 <!-- may need to move this to where the svg element lives later -->
 <script lang="ts">
+import { toRefs } from 'vue';
 export default {
-  // Prevent the root element from inheriting the fallthrough attributes if set false
+  // Prevent the root element from inheriting the fallthrough attributes if set false'
   inheritAttrs: false,
 };
 </script>
 
 <script setup lang="ts">
-import Vue from "vue";
+import type { Ref } from "vue";
+import { useSlots } from "vue";
+import * as Vue from 'vue'
 
 // Type declarations for <g> tag
 interface GroupProps {
@@ -20,13 +23,21 @@ interface GroupProps {
   // render class attributes for <g> tag
   className?: string;
   // reference to underlying <g> tag
-  innerRef?: Vue.Ref<SVGElement>;
+  innerRef?: Ref<SVGElement>;
 }
 // default values for top and left 
 const groupProps = withDefaults(defineProps<GroupProps>(), {
   top: 0,
   left: 0,
 });
+
+// useSlots().default() gives us an array of default slots passed to this component from the parent template
+// const slots = useSlots().default()
+// console.log(slots)
+// console.log(Vue.isVNode(slots[0].children))
+
+
+
 </script>
 
 <template>
@@ -37,7 +48,7 @@ const groupProps = withDefaults(defineProps<GroupProps>(), {
       :transform="groupProps.transform || `translate(${left}, ${top})`"
       v-bind="$attrs"
     >
-      <!-- slot renders children passed within the Group component -->
-      <slot />
+    <!-- slot renders children passed within the Group component -->  
+    <slot/>
     </g>
 </template>

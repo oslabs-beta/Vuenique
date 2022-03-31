@@ -7,14 +7,14 @@ export default {
 </script>
 
 <script setup lang="ts">
-import Vue from "vue";
+import type { Ref } from "vue";
 
 // Type declarations for the <rect> tag
 interface BarProps {
   // render class attributes for <rect> tag
   className?: string;
   // reference to underlying <rect> tag
-  innerRef?: Vue.Ref<SVGRectElement>;
+  innerRef?: Ref<SVGRectElement>;
 }
 
 const barProps = defineProps<BarProps>();
