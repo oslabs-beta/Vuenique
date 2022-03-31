@@ -12,13 +12,16 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "d3-array": "^3.1.1",
     "d3-interpolate": "^3.0.1",
     "d3-scale": "^4.0.2",
+    "d3-shape": "^3.1.0",
     "d3-time": "^3.0.0",
     "vue": "^3.2.31"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.0",
+    "@types/d3-shape": "^3.0.2",
     "@types/jsdom": "^16.2.14",
     "@types/node": "^16.11.25",
     "@vitejs/plugin-vue": "^2.2.2",

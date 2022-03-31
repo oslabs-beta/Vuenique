@@ -7,7 +7,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import Vue from "vue";
+import type { Ref } from "vue";
 
 // Type declarations for <g> tag
 interface GroupProps {
@@ -20,13 +20,14 @@ interface GroupProps {
   // render class attributes for <g> tag
   className?: string;
   // reference to underlying <g> tag
-  innerRef?: Vue.Ref<SVGElement>;
+  innerRef?: Ref<SVGElement>;
 }
 // default values for top and left 
 const groupProps = withDefaults(defineProps<GroupProps>(), {
   top: 0,
   left: 0,
 });
+
 </script>
 
 <template>
@@ -37,7 +38,7 @@ const groupProps = withDefaults(defineProps<GroupProps>(), {
       :transform="groupProps.transform || `translate(${left}, ${top})`"
       v-bind="$attrs"
     >
-      <!-- slot renders children passed within the Group component -->
-      <slot />
+    <!-- slot renders children passed within the Group component -->  
+    <slot/>
     </g>
 </template>
