@@ -34,11 +34,15 @@ const path = computed(() => {
   const curve = linePathProps.curve;
   return line({ x, y, defined, curve });
 })
-
+// need to add a check to see if children were passed to this component, and if children are VNodes
+  // visx: if (children) return <>{children({ path })}</>;
 </script>
 
 <template>
-  <path 
+  <path :ref="linePathProps.innerRef"
+        :className="linePathProps.className"
+        :d="path(data) || ''"
+        :fill="linePathProps.fill"
     
   />
 </template>
