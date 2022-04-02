@@ -1,9 +1,8 @@
 import { scaleTime } from 'd3-scale';
-import { DefaultOutput } from '../types/Base';
 
 import scaleOperator from '../operators/scaleOperator';
 
-
+type DefaultOutput = number | string | boolean | null;
 export const updateTimeScale = scaleOperator(
   'domain',
   'range',

@@ -1,7 +1,8 @@
 <script setup lang="tsx">
 import {  ref, computed, Ref, reactive} from "vue";
-import LinePath from "packages/vuez-shape/LinePath.vue";
-import { scaleLinear } from "packages/vuez-scale";
+import LinePath from "../../packages/vuez-shape/LinePath.vue";
+import { scaleLinear, scaleTime } from "../../packages/vuez-scale";
+import { extent } from 'd3-array';
 
 type AppleStock = {
   date: string;
@@ -113,8 +114,8 @@ const data: AppleStock[] = reactive([
 
 const getDate = (d: AppleStock) => new Date(d.date).valueOf();
 const getStockValue = (d: AppleStock) => d.close;
-const annotateDatum = data[Math.floor(data.length / 2) + 4];
-const approxTooltipHeight = 70;
+// const annotateDatum = data[Math.floor(data.length / 2) + 4];
+// const approxTooltipHeight = 70;
 
 const width = ref(400);
 const height = ref(400);
@@ -134,5 +135,13 @@ const yScale = computed(() => {
 </script>
 
 <template>
-
+  <svg :width="width" :height="height">
+    <LinePath
+      stroke="#4dffa6"
+      strokeWidth="2"
+      :data="data"
+      :x="(d: AppleStock) => xScale(getDate(d)) ?? 0"
+      :y="(d: AppleStock) => yScale(getStockValue(d)) ?? 0"
+    />
+  </svg>
 </template>

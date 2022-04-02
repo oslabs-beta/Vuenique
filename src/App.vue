@@ -4,12 +4,14 @@ import Group from "../packages/vuez-group/Group.vue";
 import { scaleBand, scaleLinear } from "../packages/vuez-scale/index";
 import {  ref, computed, Ref, reactive} from "vue";
 import BarGraph from "./components/BarGraph.vue";
+import LineGraph from "./components/LineGraph.vue";
 
 </script>
 
 <template>
   <main>
     <BarGraph/>
+    <LineGraph/>
   </main>
 </template>
 
