@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type CircleProps = {
+export type CircleProps = {
   //x-coord of circle
   x: number;
   //y-coord of circle

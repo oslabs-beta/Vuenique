@@ -5,14 +5,20 @@ import { scaleBand, scaleLinear } from '../packages/vuez-scale/index';
 import { ref, computed, Ref, reactive } from 'vue';
 import BarGraph from './components/BarGraph.vue';
 import LineGraph from './components/LineGraph.vue';
-import Circle from '../packages/vuez-shape/Circle.vue';
+import Circle, { type CircleProps } from '../packages/vuez-shape/Circle.vue';
+import Scatter from './components/Scatter.vue';
+
+const points: CircleProps[] = [];
+for (let i = 0; i < 50; i++) {
+  points.push({ x: Math.random() * 1000, y: Math.random() * 1000, r: 10 });
+}
 </script>
 
 <template>
   <main>
-    <BarGraph />
-    <LineGraph />
-    <Circle :x="50" :y="50" :r="40" />
+    <!--<BarGraph />
+    <LineGraph />-->
+    <Scatter :height="400" :width="400" :circles="points" background="green" />
   </main>
 </template>
 
