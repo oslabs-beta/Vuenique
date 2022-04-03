@@ -1,15 +1,17 @@
 <script setup lang="tsx">
-import {  ref, computed, Ref, reactive} from "vue";
-import LinePath from "../../packages/vuez-shape/LinePath.vue";
-import { scaleLinear, scaleTime } from "../../packages/vuez-scale";
+import { ref, computed, Ref, reactive } from 'vue';
+import LinePath from '../../packages/vuez-shape/LinePath.vue';
+import { scaleLinear, scaleTime } from '../../packages/vuez-scale';
 import { extent } from 'd3-array';
+
+//update to have LineGraphProps and defineProps so it's more ready to use, not relying on mock data in here
 
 type AppleStock = {
   date: string;
   close: number;
-}
+};
 const data: AppleStock[] = reactive([
-  { date: "2007-04-24T07:00:00.000Z", close: 93.24 },
+  { date: '2007-04-24T07:00:00.000Z', close: 93.24 },
   { date: '2007-04-25T07:00:00.000Z', close: 95.35 },
   { date: '2007-04-26T07:00:00.000Z', close: 98.84 },
   { date: '2007-04-27T07:00:00.000Z', close: 99.92 },
