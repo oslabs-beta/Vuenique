@@ -16,8 +16,8 @@ for (let i = 0; i < 50; i++) {
 
 <template>
   <main>
-    <!--<BarGraph />
-    <LineGraph />-->
+    <BarGraph />
+    <LineGraph />
     <Scatter :height="400" :width="400" :circles="points" background="green" />
   </main>
 </template>
