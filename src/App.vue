@@ -1,22 +1,23 @@
 <script setup lang="tsx">
-import Bar from "../packages/vuez-shape/Bar.vue";
-import Group from "../packages/vuez-group/Group.vue";
-import { scaleBand, scaleLinear } from "../packages/vuez-scale/index";
-import {  ref, computed, Ref, reactive} from "vue";
-import BarGraph from "./components/BarGraph.vue";
-import LineGraph from "./components/LineGraph.vue";
-
+import Bar from '../packages/vuez-shape/Bar.vue';
+import Group from '../packages/vuez-group/Group.vue';
+import { scaleBand, scaleLinear } from '../packages/vuez-scale/index';
+import { ref, computed, Ref, reactive } from 'vue';
+import BarGraph from './components/BarGraph.vue';
+import LineGraph from './components/LineGraph.vue';
+import Circle from '../packages/vuez-shape/Circle.vue';
 </script>
 
 <template>
   <main>
-    <BarGraph/>
-    <LineGraph/>
+    <BarGraph />
+    <LineGraph />
+    <Circle :x="50" :y="50" :r="40" />
   </main>
 </template>
 
 <style>
-@import "./assets/base.css";
+@import './assets/base.css';
 
 #app {
   max-width: 1280px;

@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import type { Line as LineType } from "d3-shape";
-import { line } from "./utils/D3ShapeFactory";
-import type { LinePathConfig, AccessorForArrayItem } from "./types";
-import type { Ref } from "vue";
-import { computed, ref } from "vue";
+import type { Line as LineType } from 'd3-shape';
+import { line } from './utils/D3ShapeFactory';
+import type { LinePathConfig, AccessorForArrayItem } from './types';
+import type { Ref } from 'vue';
+import { computed, ref } from 'vue';
 import type { CurveFactory, CurveFactoryLineOnly } from 'd3-shape';
 
-
-type Datum = number | boolean | string | object | Array<T> | null
+type Datum = number | boolean | string | object | unknown[] | null;
 
 type LinePathProps<Datum> = {
   /** Array of data for which to generate a line shape. */
@@ -29,7 +28,7 @@ type LinePathProps<Datum> = {
 };
 
 const linePathProps = withDefaults(defineProps<LinePathProps<Datum>>(), {
-  fill: "transparent",
+  fill: 'transparent',
   defined: () => true,
 });
 // const x = linePathProps.x;
@@ -44,7 +43,7 @@ const path = computed(() => {
   const defined = linePathProps.defined;
   const curve = linePathProps.curve;
   return line({ x, y, defined, curve });
-})
+});
 
 // need to add a check to see if children were passed to this component, and if children are VNodes
 // visx: if (children) return <>{children({ path })}</>;
@@ -53,7 +52,8 @@ const path = computed(() => {
 </script>
 
 <template>
-  <path :ref="linePathProps.innerRef"
+  <path
+    :ref="linePathProps.innerRef"
     :className="linePathProps.className"
     :d="data ? path(data) || '' : path([]) || ''"
     :fill="linePathProps.fill"
@@ -62,8 +62,4 @@ const path = computed(() => {
   />
 </template>
 
-<style>
-
-</style>
-
-
+<style></style>
