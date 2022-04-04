@@ -14,7 +14,7 @@ export function line<Datum>({ x, y, defined, curve }: LinePathConfig<Datum> = {}
   // path.defined(defined) returns (defined, line)
   if (curve) path.curve(curve);
 
-  console.log(path);
+  // console.log(path);
 
   return path;
 }
