@@ -81,7 +81,7 @@ const barsUpdated = computed(() => {
 <template>
   <input v-model="xMax" type="text" />
   <svg :width="xMax ? xMax : 400" :height="yMax">
-    <rect :width="xMax ? xMax : 400" :height="yMax" fill="url(#teal)" rx="14" />
+    <rect :width="xMax ? xMax : 400" :height="yMax" fill="teal" rx="14" />
     <Group>
       <Bar
         v-for="bars in barsUpdated"
