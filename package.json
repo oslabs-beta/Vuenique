@@ -22,6 +22,7 @@
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.0",
     "@types/d3-array": "^3.0.2",
+    "@types/d3-scale": "^4.0.2",
     "@types/d3-shape": "^3.0.2",
     "@types/jsdom": "^16.2.14",
     "@types/node": "^16.11.25",

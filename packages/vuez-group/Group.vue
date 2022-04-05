@@ -10,7 +10,6 @@ export default {
 <script setup lang="ts">
 import type { Ref } from "vue";
 import { useSlots } from "vue";
-import * as Vue from 'vue'
 
 // Type declarations for <g> tag
 interface GroupProps {
