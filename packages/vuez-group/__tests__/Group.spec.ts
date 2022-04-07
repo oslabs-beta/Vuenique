@@ -26,7 +26,7 @@ describe('<Group /> component', () => {
   });
 
   test('should setprops top, left, and class', () => {
-    const groupWrapper2 = groupWrapper({ class : 'test', left: 4q, top: 5 });
+    const groupWrapper2 = groupWrapper({ class : 'test', left: 4, top: 5 });
     expect(groupWrapper2.find('g').attributes().transform).toEqual('translate(4, 5)');
     expect(groupWrapper2.props('class')).toEqual('test');
   });
