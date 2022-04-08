@@ -3,13 +3,14 @@
 import { toRefs } from 'vue';
 export default {
   // Prevent the root element from inheriting the fallthrough attributes if set false'
-  inheritAttrs: false,
+  inheritAttrs: true,
 };
 </script>
 
 <script setup lang="ts">
 import type { Ref } from "vue";
-import { useSlots } from "vue";
+import { useSlots, onMounted } from "vue";
+import * as Vue from 'vue'
 
 // Type declarations for <g> tag
 interface GroupProps {
@@ -20,7 +21,7 @@ interface GroupProps {
   // alternative to top and left: written as "translate(${left}, ${top})"
   transform?: string;
   // render class attributes for <g> tag
-  className?: string;
+  class?: string;
   // reference to underlying <g> tag
   innerRef?: Ref<SVGElement>;
 }
@@ -35,18 +36,14 @@ const groupProps = withDefaults(defineProps<GroupProps>(), {
 // console.log(slots)
 // console.log(Vue.isVNode(slots[0].children))
 
-console.log(groupProps.transform);
-console.log(groupProps.left);
-console.log(groupProps.className)
-
 </script>
 
 <template>
     <!-- $attrs handle additional props not explicity defined in the interface GroupProps -->
     <g
-      :ref="groupProps.innerRef"
-      :className="groupProps.className"
-      :transform="groupProps.transform || `translate(${groupProps.left}, ${groupProps.top})`"
+      ref="groupProps.innerRef"
+      :class="groupProps.class"
+      :transform="groupProps.transform? groupProps.transform:`translate(${groupProps.left}, ${groupProps.top})`"
       v-bind="$attrs"
     >
     <!-- slot renders children passed within the Group component -->  
