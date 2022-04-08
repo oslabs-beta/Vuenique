@@ -4,10 +4,10 @@ import { mount } from "@vue/test-utils";
 import Bar from "../Bar.vue";
 
 // Creates wrapper component around Bar for testing
-const BarWrapper  = (restProps = {}, attrs = {}) => mount(Bar, {
+const BarWrapper  = (props = {}, attrs = {}) => mount(Bar, {
     shallow: true,
     propsData: {
-      ...restProps,
+      ...props,
     },
     attrs: {
       ...attrs,
