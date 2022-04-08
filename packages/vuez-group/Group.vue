@@ -35,7 +35,9 @@ const groupProps = withDefaults(defineProps<GroupProps>(), {
 // console.log(slots)
 // console.log(Vue.isVNode(slots[0].children))
 
-
+console.log(groupProps.transform);
+console.log(groupProps.left);
+console.log(groupProps.className)
 
 </script>
 
@@ -44,7 +46,7 @@ const groupProps = withDefaults(defineProps<GroupProps>(), {
     <g
       :ref="groupProps.innerRef"
       :className="groupProps.className"
-      :transform="groupProps.transform || `translate(${left}, ${top})`"
+      :transform="groupProps.transform || `translate(${groupProps.left}, ${groupProps.top})`"
       v-bind="$attrs"
     >
     <!-- slot renders children passed within the Group component -->  

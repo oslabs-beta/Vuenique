@@ -4,72 +4,27 @@
 // import LegendShape from './LegendShape';
 
 import * as Vue from 'vue'
+import * as CSS from 'csstype'
+import { computed } from 'vue'
 import type {
   FlexDirection,
   FormattedLabel,
   LabelFormatter,
   LabelFormatterFactory,
   LegendShape as LegendShapeType,
+  LegendProps as LegendProps
 } from '../../types';
 import labelTransformFactory from '../../utility/labelTransformFactory'
 import valueOrIdentity, { valueOrIdentityString } from '../../util/valueOrIdentity';
 
-
-type LegendProps = {
-  //name for legend wrapper/container
-  className?: string;
-  // styles for legend container
-  style?: Vue.CSSProperties;
-  //domain of legend
-  domain?: any[];
-  // ScaleInput<Scale>[];
-  // //legend width
-  shapeWidth?: string | number;
-  //legend height
-  shapeHeight?: string | number;
-  //legend margin
-  shapeMargin?: string | number;
-  //alignment of legend labels
-  labelAlign?: string;
-  //
-  scale: any;
-  //
-  labelFlex?: string | number;
-  //margin for the legend labels
-  labelMargin?: string | number;
-  //margin for legend items
-  itemMargin?: string | number;
-  //legend's own direction
-  direction?: FlexDirection;
-  //direction of items
-  itemDirection?: FlexDirection;
-  // fill accessor function
-  fill?: string | undefined;
-  //(label: FormattedLabel<ScaleInput<Scale>, ReturnType<Scale>>) => string | undefined
-  //size accessor function
-  size?: string | number | undefined;
-  // (
-  //   label: FormattedLabel<ScaleInput<Scale>, ReturnType<Scale>>,
-  // ) => string | number | undefined;
-  //Legend shape string preset or Element or Component
-  shape?: LegendShapeType;
-  //Styles for the legend shapes
-  shapeStyle?: (label: FormattedLabel<ScaleInput<Scale>, ReturnType<Scale>>) => Vue.CSSProperties;
-  // Given a legend item and its index, returns an item label
-  labelFormat?: LabelFormatter<ScaleInput<Scale>>;
-  //Given the legend scale and labelFormatter, returns a label with datum, index, value, and label
-  labelTransform?: LabelFormatterFactory;
-  //extra props
-  legendLabelProps?: Partial<LegendLabelProps>;
-}
 
 const defaultStyle = {
   display: 'flex',
 };
 
 const legendProps = withDefaults(defineProps<LegendProps>(), {
+  shape: 'circle',
   style: defaultStyle,
-  shape:'circle',
   fill: valueOrIdentityString,
   size: valueOrIdentityString,
   labelFormat: valueOrIdentity,
@@ -85,12 +40,61 @@ const legendProps = withDefaults(defineProps<LegendProps>(), {
   itemDirection: 'row',
 });
 
-  const domain = inputDomain || (('domain' in scale ? scale.domain() : []) as Datum[]);
-  const labelFormatter = labelTransform(scale, labelFormat );
-  const labels = domain.map(labelFormatter);
+const domain = legendProps.domain || []
+// || (('domain' in scale ? scale.domain() : []) as Datum[]);
+const labels = computed(() => {
+  const { scale, labelFormat, labelTransform } = legendProps
+  const labelFormatter = labelTransform({ scale, labelFormat })
+  return domain.map(labelFormatter)
+})
 
+
+const legendLabels = computed(() => {
+  return labels.value.map((label: any, i) => {
+    const key = `legend-${label.text}-${i}`
+    const item = domain[i]
+    const itemIndex = i 
+    return {
+      key,
+      item,
+      itemIndex,
+      label,
+    }
+  })
+})
 </script>
 
-<template></template>
+<template>
+  <div class="vuenique-legend"
+    :style="legendProps.style"
+  >
+    <LegendItem v-for="legendItem in legendLabels" :key="legendItem.key" 
+    :margin="legendProps.itemMargin" 
+    :flexDirection="legendProps.itemDirection" 
+    :label="legendItem.label"
+    <!-- need to add legendItemProps -->
+    >
+      <LegendShape :item="legendItem.item"
+      :itemIndex="legendItem.itemIndex"
+      :shape="legendProps.shape"
+      :width="legendProps.shapeWidth"
+      :height="legendProps.shapeHeight"
+      :margin="legendProps.shapeMargin"
+      :label="legendItem.label"
+      :fill="legendProps.fill"
+      :size="size"
+      :shapeStyle="legendProps.shapeStyle"
+      />
+      <LegendLabel 
+      :label="legendItem.label"
+      :flex="legendProps.labelFlex"
+      :margin="legendProps.labelMargin"
+      :align="legendProps.labelAlign"
+      :legendLabelProps="legendProps.legendLabelProps"
+      />
+    </LegendItem>
+  </div>
+</template>
 
-<style></style>
+<style>
+</style>
