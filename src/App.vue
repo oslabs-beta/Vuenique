@@ -10,7 +10,7 @@ import Scatter from './components/Scatter.vue';
 
 const points: CircleProps[] = [];
 for (let i = 0; i < 50; i++) {
-  points.push({ x: Math.random() * 1000, y: Math.random() * 1000, r: 10 });
+  points.push({ x: Math.random() * 1000, y: Math.random() * 1000, r: 4 });
 }
 </script>
 

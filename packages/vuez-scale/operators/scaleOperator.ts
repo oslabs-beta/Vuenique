@@ -4,7 +4,7 @@
 import domain from './domain';
 import range from './range';
 import align from './align';
-// import base from './base';
+import base from './base';
 import clamp from './clamp';
 // import constant from './constant';
 // import exponent from './exponent';
@@ -13,7 +13,7 @@ import nice from './nice';
 import padding from './padding';
 import reverse from './reverse';
 import round from './round';
-// import unknown from './unknown';
+import unknown from './unknown';
 import zero from './zero';
 
 
@@ -34,12 +34,12 @@ export const ALL_OPERATORS = [
 
   // Order does not matter for these operators
   'align',
-  // 'base',
+  'base',
   'clamp',
   // 'constant',
   // 'exponent',
   'padding',
-  // 'unknown',
+  'unknown',
 ] as const;
 
 // typeof ALL_OPERATORS = Array<'domain'| ...>
@@ -55,14 +55,14 @@ const operators: Record<OperatorType, typeof domain> = {
   interpolate,
   round,
   align,
-  // base,
+  base,
   clamp,
   // constant,
   // exponent,
   padding,
   range,
   reverse,
-  // unknown,
+  unknown,
 };
 
 
