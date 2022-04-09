@@ -7,11 +7,24 @@ import BarGraph from './components/BarGraph.vue';
 import LineGraph from './components/LineGraph.vue';
 import type { CircleProps } from '../packages/vuez-shape/Circle.vue';
 import Scatter from './components/Scatter.vue';
+import LinearVue from '../packages/vuenique-legend/legends/Linear.vue';
 
 const points: Array<Record<string, unknown>> = [];
 for (let i = 0; i < 50; i++) {
   points.push({ cx: Math.random() * 1000, cy: Math.random() * 1000, r: 4 });
 }
+
+// const linearScale = scaleLinear({
+//   domain: [0, 10],
+//   range: ['#ed4fbb', '#e9a039'],
+// });
+
+const linearScale = computed(() => {
+  return scaleLinear({
+    domain: [0, 10],
+    range: ['#ed4fbb', '#e9a039']
+  });
+});
 </script>
 
 <template>
@@ -19,6 +32,7 @@ for (let i = 0; i < 50; i++) {
     <BarGraph />
     <LineGraph />
     <Scatter :height="400" :width="400" :circles="points" background="green" />
+    <LinearVue :scale="linearScale" />
   </main>
 </template>
 
