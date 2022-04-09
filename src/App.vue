@@ -23,8 +23,8 @@ const linearScale = computed(() => {
   return scaleLinear({
     domain: [0, 10],
     range: ['#ed4fbb', '#e9a039']
-  })
-})
+  });
+});
 </script>
 
 <template>

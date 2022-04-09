@@ -33,7 +33,7 @@ export type LegendProps = {
   // size accessor function
   size?: (label: any) => string | number | undefined;
   // legend shape string preset or Element or Component
-  shape?: LegendShape<any, any>;
+  shape?: LegendShape;
   // styles for the legend shapes
   shapeStyle?: (label: any) => Vue.CSSProperties;
   // given a legend item and its index, returns an item label
@@ -48,12 +48,12 @@ export type LegendProps = {
 export type LinearProps = LegendProps & { steps?: number };
 
 // shape types
-export type LegendShape<Data, Output> =
+export type LegendShape =
   | "rect"
   | "circle"
   | "line"
-  | Vue.FunctionalComponent<RenderShapeProvidedProps<Data, Output>>
-  | Vue.Component<RenderShapeProvidedProps<Data, Output>>;
+  // | Vue.FunctionalComponent<RenderShapeProvidedProps<Data, Output>>
+  // | Vue.Component<RenderShapeProvidedProps<Data, Output>>;
 // | React.FC<RenderShapeProvidedProps<Data, Output>>
 // | React.ComponentClass<RenderShapeProvidedProps<Data, Output>>;
 

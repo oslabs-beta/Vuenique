@@ -11,6 +11,7 @@ import {
   valueOrIdentity,
   valueOrIdentityString,
 } from "../../utility/valueOrIdentity";
+import type { ValueOrIdentity } from "../../utility/valueOrIdentity";
 import LegendItem from "./LegendItem.vue";
 import LegendLabel from "./LegendLabel.vue";
 import LegendShape from "./LegendShape.vue";
@@ -48,13 +49,13 @@ type LegendProps = {
   // size accessor function
   size?: (label: any) => string | number | undefined;
   // legend shape string preset or Element or Component
-  shape?: LegendShapeProps<any, any>;
+  shape?: LegendShapeProps;
   // styles for the legend shapes
   shapeStyle?: (label: any) => Vue.CSSProperties;
   // given a legend item and its index, returns an item label
-  labelFormat?: any;
+  labelFormat?: <T>(obj: ValueOrIdentity<T>) => T;
   // given the legend scale and labelFormatter, returns a label with datum, index, value, and label
-  labelTransform?: any;
+  labelTransform?: (arg: { scale: any, labelFormat: <T>(obj: ValueOrIdentity<T>) => T}) => (d: number, i: number) => Record<string, unknown>;
   // extra props
   legendLabelProps?: Partial<LegendLabelProps>;
 };
@@ -62,7 +63,7 @@ type LegendProps = {
 const legendProps = withDefaults(defineProps<LegendProps>(), {
   shape: "circle",
   style: {
-  display: "flex",
+    display: "flex",
   },
   fill: valueOrIdentityString,
   size: valueOrIdentityString,
@@ -78,15 +79,15 @@ const legendProps = withDefaults(defineProps<LegendProps>(), {
   direction: "column",
   itemDirection: "row",
 });
-
+console.log(legendProps.labelFormat);
 // if no domain prop, domain should be -> (('domain' in scale ? scale.domain() : []) as Datum[])
 const domain = legendProps.domain || [];
 const labels = computed(() => {
   const { scale, labelFormat, labelTransform } = legendProps;
+  console.log(legendProps.labelTransform)
   const labelFormatter = labelTransform({ scale, labelFormat });
   return domain.map(labelFormatter);
 });
-console.log(legendProps.labelFormat)
 
 const legendLabels = computed(() => {
   return labels.value.map((label: any, i) => {
@@ -101,10 +102,18 @@ const legendLabels = computed(() => {
     };
   });
 });
+
+const styleObject = computed(() => {
+  const { style, direction } = legendProps;
+  return {
+    ...style,
+    direction,
+  };
+});
 </script>
 
 <template>
-  <div class="vuenique-legend" :style="legendProps.style">
+  <div class="vuenique-legend" :style="styleObject.value">
     <LegendItem
       v-for="legendItem in legendLabels"
       :key="legendItem.key"
@@ -126,7 +135,7 @@ const legendLabels = computed(() => {
         :shapeStyle="legendProps.shapeStyle"
       />
       <LegendLabel
-        :label="legendItem.label"
+        :label="legendItem.label.text"
         :flex="legendProps.labelFlex"
         :margin="legendProps.labelMargin"
         :align="legendProps.labelAlign"
