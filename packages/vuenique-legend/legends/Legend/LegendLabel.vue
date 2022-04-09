@@ -21,7 +21,6 @@ const legendLabelProps = withDefaults(defineProps<LegendLabelOwnProps>(), {
   margin:'5px 0',
   align: 'left',
 })
-console.log(legendLabelProps.label)
 </script>
 <template>
 <div className = "legendLabels" v-bind="$attrs" v-bind:style="{justifyContent: legendLabelProps.align, display:'flex', flex: legendLabelProps.flex, margin: legendLabelProps.margin}">

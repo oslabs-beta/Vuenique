@@ -79,12 +79,10 @@ const legendProps = withDefaults(defineProps<LegendProps>(), {
   direction: "column",
   itemDirection: "row",
 });
-console.log(legendProps.labelFormat);
 // if no domain prop, domain should be -> (('domain' in scale ? scale.domain() : []) as Datum[])
 const domain = legendProps.domain || [];
 const labels = computed(() => {
   const { scale, labelFormat, labelTransform } = legendProps;
-  console.log(legendProps.labelTransform)
   const labelFormatter = labelTransform({ scale, labelFormat });
   return domain.map(labelFormatter);
 });
