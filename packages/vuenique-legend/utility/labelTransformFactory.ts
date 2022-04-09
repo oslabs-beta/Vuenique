@@ -1,6 +1,9 @@
 import type { LabelFormatter } from "../types";
 
-export default function labelTransformFactory({ scale, labelFormat }: {
+export default function labelTransformFactory({
+  scale,
+  labelFormat,
+}: {
   scale: any,
   labelFormat: any
 }) {
