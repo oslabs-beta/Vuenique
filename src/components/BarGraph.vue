@@ -41,6 +41,7 @@ const getLetterFrequency = (d) => Number(d.frequency) * 100;
 const xMax: Ref<number> = ref(400);
 const yMax: Ref<number> = ref(400);
 
+
 const xScale = computed(() => {
   return scaleBand({
     range: [0, xMax.value ? xMax.value : 400],
@@ -94,6 +95,7 @@ console.log(xScale.value.domain())
         :width="bars.barWidth"
         :height="bars.barHeight"
         fill="rgba(23, 233, 217, .5)"
+        class="bar"
       />
     </Group>
   </svg>
