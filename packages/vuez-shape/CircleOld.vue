@@ -1,13 +1,11 @@
 <script setup lang="ts">
 export type CircleProps = {
-  // render class attributes for <rect> tag
-  class?: string;
   //x-coord of circle
-  x?: number;
+  x: number;
   //y-coord of circle
-  y?: number;
+  y: number;
   //radius of circle
-  r?: number;
+  r: number;
   //fill color of circle
   fill?: string;
 };

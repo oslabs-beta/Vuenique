@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { mount } from "@vue/test-utils";
 
-import CircleCopy from "../CircleCopy.vue";
+import Circle from "../Circle.vue";
 
 // test the following properties
   // circle defaults to black
@@ -9,7 +9,8 @@ import CircleCopy from "../CircleCopy.vue";
   // can pass props
   // can pass attributes
 
-const CircleWrapper  = (props = {}, attrs = {}) => mount(CircleCopy, {
+const CircleWrapper = (props = {}, attrs = {}) =>
+  mount(Circle, {
     shallow: true,
     propsData: {
       ...props,
@@ -21,7 +22,7 @@ const CircleWrapper  = (props = {}, attrs = {}) => mount(CircleCopy, {
 
 describe("Circle component...", () => {
   test("should be defined", () => {
-    expect(CircleCopy).toBeDefined();
+    expect(Circle).toBeDefined();
   });
 
   test("should have test class passed in through props", () => {
@@ -32,20 +33,16 @@ describe("Circle component...", () => {
     ).toBe("test");
   });
 
-  test("should have receive rest of defined props passed in through props", () => {
-    const testCircle = CircleWrapper({x:50, y:50, r:50});
-    expect(testCircle.props("x")).toBe(50);
-    expect(testCircle.props("y")).toBe(50);
-    expect(testCircle.props("r")).toBe(50);
-    expect(testCircle.props("class")).toBeUndefined();
+  test("should pass additional props through to element attributes", () => {
+    const testCircle = CircleWrapper({ cx: 50, cy: 50, r: 50 });
+    expect(testCircle.element.getAttribute("cx")).toBe("50");
+    expect(testCircle.element.getAttribute("cy")).toBe("50");
+    expect(testCircle.element.getAttribute("r")).toBe("50");
+    expect(testCircle.element.getAttribute("class")).toBeNull();
   });
 
   test("should have fill overwritten when passed through props", () => {
-    const testCircle = CircleWrapper({
-      id: "tester",
-      fill: "white",
-    });
-    console.log("tester", testCircle.find("circle").element.style);
-    expect(testCircle.props("fill")).toBe("white");
+    const testCircle = CircleWrapper({ fill: "white" });
+    expect(testCircle.element.getAttribute("fill")).toBe("white");
   })
 })
