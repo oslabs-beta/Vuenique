@@ -21,8 +21,6 @@ const legendShapeProps = withDefaults(defineProps<LegendShapeProps>(), {
   radius: '5',
 });
 
-console.log(legendShapeProps.fill);
-
 const labelFill = computed(() => {
   const { fill, label } = legendShapeProps;
   return fill({ ...label });

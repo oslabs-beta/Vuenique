@@ -77,9 +77,6 @@ const barsUpdated = computed(() => {
     };
   });
 });
-
-console.log(xScale.value.domain())
-
 </script>
 
 <template>
