@@ -1,4 +1,4 @@
-import { scaleOrdinal } from '../';
+import { scaleOrdinal } from '..';
 
 describe('scaleOrdinal', () => {
 

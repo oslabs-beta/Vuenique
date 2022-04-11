@@ -2,7 +2,7 @@ import {ref} from 'vue';
 import { describe, it, expect, test } from 'vitest';
 import { mount } from '@vue/test-utils';
 
-import Group from '../Group.vue';
+import Group from "../Group.vue"
 
 const groupWrapper = (props = {}, attrs = {}) => mount(Group, {
     shallow: true,

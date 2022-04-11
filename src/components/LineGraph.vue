@@ -1,7 +1,7 @@
 <script setup lang="tsx">
 import { ref, computed, Ref, reactive } from 'vue';
-import LinePath from '../../packages/vuez-shape/LinePath.vue';
-import { scaleLinear, scaleTime } from '../../packages/vuez-scale';
+import LinePath from '../../packages/vuenique-shape/LinePath.vue';
+import { scaleLinear, scaleTime } from '../../packages/vuenique-scale';
 import { extent } from 'd3-array';
 
 //update to have LineGraphProps and defineProps so it's more ready to use, not relying on mock data in here

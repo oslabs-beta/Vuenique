@@ -1,11 +1,11 @@
 <script setup lang="tsx">
-import Bar from '../packages/vuez-shape/Bar.vue';
-import Group from '../packages/vuez-group/Group.vue';
-import { scaleBand, scaleLinear } from '../packages/vuez-scale/index';
+import Bar from '../packages/vuenique-shape/Bar.vue';
+import Group from '../packages/vuenique-group/Group.vue';
+import { scaleBand, scaleLinear } from '../packages/vuenique-scale/index';
 import { ref, computed, Ref, reactive } from 'vue';
 import BarGraph from './components/BarGraph.vue';
 import LineGraph from './components/LineGraph.vue';
-import type { CircleProps } from '../packages/vuez-shape/Circle.vue';
+import type { CircleProps } from '../packages/vuenique-shape/Circle.vue';
 import Scatter from './components/Scatter.vue';
 import LinearVue from '../packages/vuenique-legend/legends/Linear.vue';
 

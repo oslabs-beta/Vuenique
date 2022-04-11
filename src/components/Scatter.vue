@@ -1,9 +1,9 @@
 <script setup lang="tsx">
 // import type { CircleProps } from '../../packages/vuez-shape/Circle.vue';
-import { scaleLinear } from '../../packages/vuez-scale';
+import { scaleLinear } from '../../packages/vuenique-scale';
 import { extent, max } from 'd3-array';
 import { ref, computed } from 'vue';
-import Circle, { type CircleProps } from '../../packages/vuez-shape/Circle.vue';
+import Circle, { type CircleProps } from '../../packages/vuenique-shape/Circle.vue';
 
 type ScatterProps = {
   //height of entire plot
