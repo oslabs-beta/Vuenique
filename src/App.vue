@@ -14,15 +14,10 @@ for (let i = 0; i < 50; i++) {
   points.push({ cx: Math.random() * 1000, cy: Math.random() * 1000, r: 4 });
 }
 
-// const linearScale = scaleLinear({
-//   domain: [0, 10],
-//   range: ['#ed4fbb', '#e9a039'],
-// });
-
 const linearScale = computed(() => {
   return scaleLinear({
     domain: [0, 10],
-    range: ['#ed4fbb', '#e9a039']
+    range: ["#ed4fbb", "#e9a039"],
   });
 });
 </script>

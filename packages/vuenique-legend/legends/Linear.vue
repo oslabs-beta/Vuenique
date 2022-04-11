@@ -3,25 +3,23 @@ import Legend from "./Legend/index.vue";
 import type { FlexDirection, LegendShape, LegendLabelProps } from "../types";
 import { computed } from "vue";
 import defaultDomain from "../utility/defaultDomain";
-import type * as Vue from "vue"
+import type * as Vue from "vue";
 
 type LinearProps = {
-  // name for legend wrapper/container
-  className?: string;
+  // scale function
+  scale: any;
   // styles for legend container
   style?: any;
   // domain of legend
   domain?: any[];
-  // legend width
+  // legend shape width
   shapeWidth?: string | number;
-  // legend height
+  // legend shape height
   shapeHeight?: string | number;
-  // legend margin
+  // legend shape margin
   shapeMargin?: string | number;
   // alignment of legend labels
   labelAlign?: string;
-  // scale function
-  scale: any;
   // flex-box flex of legend item labels
   labelFlex?: string | number;
   // margin for the legend labels
@@ -37,7 +35,7 @@ type LinearProps = {
   // size accessor function
   size?: (label: any) => string | number | undefined;
   // legend shape string preset or Element or Component
-  shape?: LegendShape<any, any>;
+  shape?: LegendShape;
   // styles for the legend shapes
   shapeStyle?: (label: any) => Vue.CSSProperties;
   // given a legend item and its index, returns an item label
@@ -46,14 +44,18 @@ type LinearProps = {
   labelTransform?: any;
   // extra props
   legendLabelProps?: Partial<LegendLabelProps>;
-
-  steps?: number
+  // number of legend items
+  steps?: number;
 };
+
+// defining props and setting default values
 const legendLinearProps = withDefaults(defineProps<LinearProps>(), {
   steps: 5,
 });
 
+// sets domain to inputted domain or calculates a default domain based on inputted scale function
 const domain = computed(() => {
+  if (legendLinearProps.domain) return legendLinearProps.domain;
   const { steps, scale } = legendLinearProps;
   return defaultDomain({ steps, scale });
 });
@@ -62,6 +64,6 @@ const domain = computed(() => {
   <Legend
     v-bind="$attrs"
     :scale="legendLinearProps.scale"
-    :domain="legendLinearProps.domain ? legendLinearProps.domain : domain"
+    :domain="domain"
   ></Legend>
 </template>

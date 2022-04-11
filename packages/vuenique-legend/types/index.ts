@@ -60,7 +60,7 @@ export type LegendShape =
 // label formatter function
 export type LabelFormatter<Datum> = (
   item: Datum,
-  itemIndex: number,
+  itemIndex: number
 ) => Datum | string | number | undefined;
 
 // label object

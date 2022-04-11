@@ -8,9 +8,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import type { Ref } from "vue";
-import { useSlots, onMounted } from "vue";
-import * as Vue from 'vue'
+import type { Ref } from 'vue';
+import { useSlots, onMounted } from 'vue';
+import * as Vue from 'vue';
 
 // Type declarations for <g> tag
 interface GroupProps {
@@ -25,7 +25,7 @@ interface GroupProps {
   // reference to underlying <g> tag
   innerRef?: Ref<SVGElement>;
 }
-// default values for top and left 
+// default values for top and left
 const groupProps = withDefaults(defineProps<GroupProps>(), {
   top: 0,
   left: 0,
@@ -35,18 +35,21 @@ const groupProps = withDefaults(defineProps<GroupProps>(), {
 // const slots = useSlots().default()
 // console.log(slots)
 // console.log(Vue.isVNode(slots[0].children))
-
 </script>
 
 <template>
-    <!-- $attrs handle additional props not explicity defined in the interface GroupProps -->
-    <g
-      ref="groupProps.innerRef"
-      :class="groupProps.class"
-      :transform="groupProps.transform? groupProps.transform:`translate(${groupProps.left}, ${groupProps.top})`"
-      v-bind="$attrs"
-    >
-    <!-- slot renders children passed within the Group component -->  
-    <slot/>
-    </g>
+  <!-- $attrs handle additional props not explicity defined in the interface GroupProps -->
+  <g
+    ref="groupProps.innerRef"
+    :class="groupProps.class"
+    :transform="
+      groupProps.transform
+        ? groupProps.transform
+        : `translate(${groupProps.left}, ${groupProps.top})`
+    "
+    v-bind="$attrs"
+  >
+    <!-- slot renders children passed within the Group component -->
+    <slot />
+  </g>
 </template>
