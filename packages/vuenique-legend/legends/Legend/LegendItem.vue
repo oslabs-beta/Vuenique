@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import type * as Vue from "vue";
 import type { FlexDirection } from "../../types";
 
 type LegendItemOwnProps = {
@@ -11,9 +10,7 @@ type LegendItemOwnProps = {
   display?: string;
 };
 
-// type LegendItemProps = LegendItemOwnProps &
-//   Omit<Vue.HTMLAttributes, keyof LegendItemOwnProps>;
-
+// define props and default values
 const legendItemProps = withDefaults(defineProps<LegendItemOwnProps>(), {
   flexDirection: "row",
   alignItems: "center",

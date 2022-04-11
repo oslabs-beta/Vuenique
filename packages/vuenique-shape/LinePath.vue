@@ -47,8 +47,6 @@ const path = computed(() => {
 
 // need to add a check to see if children were passed to this component, and if children are VNodes
 // visx: if (children) return <>{children({ path })}</>;
-
-// console.log(path.value(linePathProps.data), "path data")
 </script>
 
 <template>

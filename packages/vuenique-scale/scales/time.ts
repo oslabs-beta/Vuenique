@@ -10,15 +10,9 @@ export const updateTimeScale = scaleOperator(
   'clamp',
   'interpolate',
   'nice',
-  'round',
+  'round'
 );
 
 export default function createTimeScale<Output = DefaultOutput>(config?: any) {
   return updateTimeScale(scaleTime<Output>(), config);
 }
-
-// export default function createTimeScale<Output = DefaultOutput>(
-//     config?: PickScaleConfigWithoutType<'time', Output>,
-//   ) {
-//     return updateTimeScale(scaleTime<Output>(), config);
-//   }
