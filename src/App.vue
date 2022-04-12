@@ -1,14 +1,9 @@
 <script setup lang="tsx">
-// import Bar from '../packages/vuenique-shape/Bar.vue';
-// import Group from '../packages/vuenique-group/Group.vue';
-// import { scaleBand, scaleLinear } from '../packages/vuenique-scale/index';
-import { scaleLinear, LegendLinear } from "@vueniquejs/vuenique";
-import { ref, computed, Ref, reactive } from 'vue';
+import { computed } from 'vue';
 import BarGraph from './components/BarGraph.vue';
 import LineGraph from './components/LineGraph.vue';
-import type { CircleProps } from '../packages/vuenique-shape/Circle.vue';
 import Scatter from './components/Scatter.vue';
-// import LinearVue from '../packages/vuenique-legend/legends/Linear.vue';
+import { LegendLinear, scaleLinear } from '@vueniquejs/vuenique';
 
 const points: Array<Record<string, unknown>> = [];
 for (let i = 0; i < 50; i++) {

@@ -1,6 +1,7 @@
 <script setup lang="tsx">
-import { ref, computed, Ref, reactive } from 'vue';
-import { LinePath, scaleLinear, scaleTime } from '@vueniquejs/vuenique';
+import { ref, computed, reactive } from 'vue';
+import type { Ref } from 'vue';
+import { LinePath, scaleLinear, scaleTime } from "@vueniquejs/vuenique"
 import { extent } from 'd3-array';
 
 //update to have LineGraphProps and defineProps so it's more ready to use, not relying on mock data in here
