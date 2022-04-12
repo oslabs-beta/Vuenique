@@ -1,9 +1,10 @@
 <script setup lang="tsx">
-import type { CircleProps } from '../../packages/vuez-shape/Circle.vue';
-import { scaleLinear } from '../../packages/vuez-scale';
+// import type { CircleProps } from '../../packages/vuez-shape/Circle.vue';
+import { scaleLinear, Circle } from "@vueniquejs/vuenique"
+// import { scaleLinear } from '../../packages/vuenique-scale';
 import { extent, max } from 'd3-array';
 import { ref, computed } from 'vue';
-import Circle from '../../packages/vuez-shape/Circle.vue';
+// import Circle, { type CircleProps } from '../../packages/vuenique-shape/Circle.vue';
 
 type ScatterProps = {
   //height of entire plot
@@ -11,7 +12,7 @@ type ScatterProps = {
   //width of entire plot
   width: number;
   //circles to render
-  circles: CircleProps[];
+  circles: Record<string, unknown>[];
   //background color for plot
   background: string;
 };
@@ -21,16 +22,16 @@ const scatterProps = defineProps<ScatterProps>();
 const width = ref(400);
 const height = ref(400);
 //max radius of circles; scaling needed to keep dots within plot, grabbing specifically the max in case of different radii
-const maxR = max(scatterProps.circles, (d: CircleProps) => d.r)!;
+const maxR = max(scatterProps.circles, (d: any) => d.r)!;
 const xScale = computed(() => {
   return scaleLinear({
-    domain: extent(scatterProps.circles, (d: CircleProps) => d.x),
+    domain: extent(scatterProps.circles, (d: any) => d.cx),
     range: [0 + maxR, width.value - maxR],
   });
 });
 const yScale = computed(() => {
   return scaleLinear({
-    domain: extent(scatterProps.circles, (d: CircleProps) => d.y),
+    domain: extent(scatterProps.circles, (d: any) => d.cy),
     range: [0 + maxR, height.value - maxR],
   });
 });
@@ -48,8 +49,9 @@ const yScale = computed(() => {
       v-for="(props, index) in scatterProps.circles"
       :key="index"
       v-bind="props"
-      :x="xScale(props.x)"
-      :y="yScale(props.y)"
+      :cx="xScale(props.cx)"
+      :cy="yScale(props.cy)"
+      class="circle"
     />
   </svg>
 </template>

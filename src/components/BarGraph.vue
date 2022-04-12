@@ -1,8 +1,7 @@
 <script setup lang="tsx">
-import Bar from '../../packages/vuez-shape/Bar.vue';
-import Group from '../../packages/vuez-group/Group.vue';
-import { scaleBand, scaleLinear } from '../../packages/vuez-scale/index';
-import { ref, computed, Ref, reactive } from 'vue';
+import { Bar, Group, scaleBand, scaleLinear} from "@vueniquejs/vuenique"
+import { ref, computed, reactive } from 'vue';
+import type { Ref } from 'vue';
 
 //update to have BarGraphProps and defineProps so it's more ready to use, not relying on mock data in here
 
@@ -40,6 +39,7 @@ const getLetterFrequency = (d) => Number(d.frequency) * 100;
 
 const xMax: Ref<number> = ref(400);
 const yMax: Ref<number> = ref(400);
+
 
 const xScale = computed(() => {
   return scaleBand({
@@ -91,6 +91,7 @@ const barsUpdated = computed(() => {
         :width="bars.barWidth"
         :height="bars.barHeight"
         fill="rgba(23, 233, 217, .5)"
+        class="bar"
       />
     </Group>
   </svg>

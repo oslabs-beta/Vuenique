@@ -1,17 +1,21 @@
 <script setup lang="tsx">
-import Bar from '../packages/vuez-shape/Bar.vue';
-import Group from '../packages/vuez-group/Group.vue';
-import { scaleBand, scaleLinear } from '../packages/vuez-scale/index';
-import { ref, computed, Ref, reactive } from 'vue';
+import { computed } from 'vue';
 import BarGraph from './components/BarGraph.vue';
 import LineGraph from './components/LineGraph.vue';
-import Circle, { type CircleProps } from '../packages/vuez-shape/Circle.vue';
 import Scatter from './components/Scatter.vue';
+import { LegendLinear, scaleLinear } from '@vueniquejs/vuenique';
 
-const points: CircleProps[] = [];
+const points: Array<Record<string, unknown>> = [];
 for (let i = 0; i < 50; i++) {
-  points.push({ x: Math.random() * 1000, y: Math.random() * 1000, r: 10 });
+  points.push({ cx: Math.random() * 1000, cy: Math.random() * 1000, r: 4 });
 }
+
+const linearScale = computed(() => {
+  return scaleLinear({
+    domain: [0, 10],
+    range: ["#ed4fbb", "#e9a039"],
+  });
+});
 </script>
 
 <template>
@@ -19,6 +23,7 @@ for (let i = 0; i < 50; i++) {
     <BarGraph />
     <LineGraph />
     <Scatter :height="400" :width="400" :circles="points" background="green" />
+    <LegendLinear :scale="linearScale" />
   </main>
 </template>
 
