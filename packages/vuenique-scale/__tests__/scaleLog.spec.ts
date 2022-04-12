@@ -1,4 +1,4 @@
-import { scaleLog } from '../';
+import { scaleLog } from '..';
 
 describe('scaleLog()', () => {
 

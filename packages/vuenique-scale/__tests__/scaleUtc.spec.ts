@@ -1,5 +1,5 @@
 import TimezoneMock from 'timezone-mock';
-import { scaleUtc } from '../';
+import { scaleUtc } from '..';
 
 describe('scaleUtc()', () => {
   let domain: [Date, Date];

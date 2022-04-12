@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-type LegendShapeProps = {
+export type LegendShapeProps = {
   label?: any;
   itemIndex: number;
   margin?: string | number;

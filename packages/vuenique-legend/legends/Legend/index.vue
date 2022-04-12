@@ -16,7 +16,7 @@ import LegendItem from "./LegendItem.vue";
 import LegendLabel from "./LegendLabel.vue";
 import LegendShape from "./LegendShape.vue";
 
-type LegendProps = {
+export type LegendProps = {
   // scale function
   scale: any;
   // styles for legend container

@@ -1,4 +1,4 @@
-import { scaleLinear } from '../';
+import { scaleLinear } from '..';
 
 describe('scaleLinear()', () => {
   

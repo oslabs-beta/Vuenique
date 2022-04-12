@@ -1,4 +1,4 @@
-import { scaleThreshold } from '../';
+import { scaleThreshold } from '..';
 
 describe('scaleThreshold', () => {
 

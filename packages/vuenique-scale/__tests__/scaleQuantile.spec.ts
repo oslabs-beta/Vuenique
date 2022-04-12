@@ -1,4 +1,4 @@
-import { scaleQuantile } from '../';
+import { scaleQuantile } from '..';
 
 describe('scaleQuantile', () => {
 
