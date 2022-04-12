@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type * as Vue from "vue";
 
-type LegendLabelOwnProps = {
+export type LegendLabelOwnProps = {
   align?: string;
   label?: any;
   flex?: string | number;

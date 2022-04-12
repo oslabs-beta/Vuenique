@@ -2,7 +2,7 @@
 import { computed } from "vue";
 import type { FlexDirection } from "../../types";
 
-type LegendItemOwnProps = {
+export type LegendItemOwnProps = {
   flexDirection?: FlexDirection;
   alignItems?: string;
   margin?: string | number;

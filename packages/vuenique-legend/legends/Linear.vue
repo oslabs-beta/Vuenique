@@ -5,7 +5,7 @@ import { computed } from "vue";
 import defaultDomain from "../utility/defaultDomain";
 import type * as Vue from "vue";
 
-type LinearProps = {
+export type LinearProps = {
   // scale function
   scale: any;
   // styles for legend container

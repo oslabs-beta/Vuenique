@@ -17,270 +17,7 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-import { defineComponent, openBlock, createElementBlock, mergeProps, renderSlot, computed, unref } from "vue";
-const _hoisted_1$1 = ["transform"];
-const __default__ = {
-  inheritAttrs: true
-};
-const _sfc_main$3 = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({}, __default__), {
-  props: {
-    top: { default: 0 },
-    left: { default: 0 },
-    transform: null,
-    class: null,
-    innerRef: null
-  },
-  setup(__props) {
-    const groupProps = __props;
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("g", mergeProps({
-        ref: "groupProps.innerRef",
-        class: groupProps.class,
-        transform: groupProps.transform ? groupProps.transform : `translate(${groupProps.left}, ${groupProps.top})`
-      }, _ctx.$attrs), [
-        renderSlot(_ctx.$slots, "default")
-      ], 16, _hoisted_1$1);
-    };
-  }
-}));
-const _sfc_main$2 = /* @__PURE__ */ defineComponent({
-  props: {
-    class: null
-  },
-  setup(__props) {
-    const barProps = __props;
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("rect", mergeProps({
-        class: barProps.class
-      }, _ctx.$attrs), null, 16);
-    };
-  }
-});
-const _sfc_main$1 = /* @__PURE__ */ defineComponent({
-  props: {
-    class: null
-  },
-  setup(__props) {
-    const circleProps = __props;
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("circle", mergeProps({
-        class: circleProps.class
-      }, _ctx.$attrs), null, 16);
-    };
-  }
-});
-const pi = Math.PI, tau = 2 * pi, epsilon = 1e-6, tauEpsilon = tau - epsilon;
-function Path() {
-  this._x0 = this._y0 = this._x1 = this._y1 = null;
-  this._ = "";
-}
-function path() {
-  return new Path();
-}
-Path.prototype = path.prototype = {
-  constructor: Path,
-  moveTo: function(x2, y2) {
-    this._ += "M" + (this._x0 = this._x1 = +x2) + "," + (this._y0 = this._y1 = +y2);
-  },
-  closePath: function() {
-    if (this._x1 !== null) {
-      this._x1 = this._x0, this._y1 = this._y0;
-      this._ += "Z";
-    }
-  },
-  lineTo: function(x2, y2) {
-    this._ += "L" + (this._x1 = +x2) + "," + (this._y1 = +y2);
-  },
-  quadraticCurveTo: function(x1, y1, x2, y2) {
-    this._ += "Q" + +x1 + "," + +y1 + "," + (this._x1 = +x2) + "," + (this._y1 = +y2);
-  },
-  bezierCurveTo: function(x1, y1, x2, y2, x3, y3) {
-    this._ += "C" + +x1 + "," + +y1 + "," + +x2 + "," + +y2 + "," + (this._x1 = +x3) + "," + (this._y1 = +y3);
-  },
-  arcTo: function(x1, y1, x2, y2, r) {
-    x1 = +x1, y1 = +y1, x2 = +x2, y2 = +y2, r = +r;
-    var x0 = this._x1, y0 = this._y1, x21 = x2 - x1, y21 = y2 - y1, x01 = x0 - x1, y01 = y0 - y1, l01_2 = x01 * x01 + y01 * y01;
-    if (r < 0)
-      throw new Error("negative radius: " + r);
-    if (this._x1 === null) {
-      this._ += "M" + (this._x1 = x1) + "," + (this._y1 = y1);
-    } else if (!(l01_2 > epsilon))
-      ;
-    else if (!(Math.abs(y01 * x21 - y21 * x01) > epsilon) || !r) {
-      this._ += "L" + (this._x1 = x1) + "," + (this._y1 = y1);
-    } else {
-      var x20 = x2 - x0, y20 = y2 - y0, l21_2 = x21 * x21 + y21 * y21, l20_2 = x20 * x20 + y20 * y20, l21 = Math.sqrt(l21_2), l01 = Math.sqrt(l01_2), l = r * Math.tan((pi - Math.acos((l21_2 + l01_2 - l20_2) / (2 * l21 * l01))) / 2), t01 = l / l01, t21 = l / l21;
-      if (Math.abs(t01 - 1) > epsilon) {
-        this._ += "L" + (x1 + t01 * x01) + "," + (y1 + t01 * y01);
-      }
-      this._ += "A" + r + "," + r + ",0,0," + +(y01 * x20 > x01 * y20) + "," + (this._x1 = x1 + t21 * x21) + "," + (this._y1 = y1 + t21 * y21);
-    }
-  },
-  arc: function(x2, y2, r, a0, a1, ccw) {
-    x2 = +x2, y2 = +y2, r = +r, ccw = !!ccw;
-    var dx = r * Math.cos(a0), dy = r * Math.sin(a0), x0 = x2 + dx, y0 = y2 + dy, cw = 1 ^ ccw, da = ccw ? a0 - a1 : a1 - a0;
-    if (r < 0)
-      throw new Error("negative radius: " + r);
-    if (this._x1 === null) {
-      this._ += "M" + x0 + "," + y0;
-    } else if (Math.abs(this._x1 - x0) > epsilon || Math.abs(this._y1 - y0) > epsilon) {
-      this._ += "L" + x0 + "," + y0;
-    }
-    if (!r)
-      return;
-    if (da < 0)
-      da = da % tau + tau;
-    if (da > tauEpsilon) {
-      this._ += "A" + r + "," + r + ",0,1," + cw + "," + (x2 - dx) + "," + (y2 - dy) + "A" + r + "," + r + ",0,1," + cw + "," + (this._x1 = x0) + "," + (this._y1 = y0);
-    } else if (da > epsilon) {
-      this._ += "A" + r + "," + r + ",0," + +(da >= pi) + "," + cw + "," + (this._x1 = x2 + r * Math.cos(a1)) + "," + (this._y1 = y2 + r * Math.sin(a1));
-    }
-  },
-  rect: function(x2, y2, w, h) {
-    this._ += "M" + (this._x0 = this._x1 = +x2) + "," + (this._y0 = this._y1 = +y2) + "h" + +w + "v" + +h + "h" + -w + "Z";
-  },
-  toString: function() {
-    return this._;
-  }
-};
-function constant$1(x2) {
-  return function constant2() {
-    return x2;
-  };
-}
-function array(x2) {
-  return typeof x2 === "object" && "length" in x2 ? x2 : Array.from(x2);
-}
-function Linear(context) {
-  this._context = context;
-}
-Linear.prototype = {
-  areaStart: function() {
-    this._line = 0;
-  },
-  areaEnd: function() {
-    this._line = NaN;
-  },
-  lineStart: function() {
-    this._point = 0;
-  },
-  lineEnd: function() {
-    if (this._line || this._line !== 0 && this._point === 1)
-      this._context.closePath();
-    this._line = 1 - this._line;
-  },
-  point: function(x2, y2) {
-    x2 = +x2, y2 = +y2;
-    switch (this._point) {
-      case 0:
-        this._point = 1;
-        this._line ? this._context.lineTo(x2, y2) : this._context.moveTo(x2, y2);
-        break;
-      case 1:
-        this._point = 2;
-      default:
-        this._context.lineTo(x2, y2);
-        break;
-    }
-  }
-};
-function curveLinear(context) {
-  return new Linear(context);
-}
-function x(p) {
-  return p[0];
-}
-function y(p) {
-  return p[1];
-}
-function d3Line(x$1, y$1) {
-  var defined = constant$1(true), context = null, curve = curveLinear, output = null;
-  x$1 = typeof x$1 === "function" ? x$1 : x$1 === void 0 ? x : constant$1(x$1);
-  y$1 = typeof y$1 === "function" ? y$1 : y$1 === void 0 ? y : constant$1(y$1);
-  function line2(data) {
-    var i, n = (data = array(data)).length, d, defined0 = false, buffer;
-    if (context == null)
-      output = curve(buffer = path());
-    for (i = 0; i <= n; ++i) {
-      if (!(i < n && defined(d = data[i], i, data)) === defined0) {
-        if (defined0 = !defined0)
-          output.lineStart();
-        else
-          output.lineEnd();
-      }
-      if (defined0)
-        output.point(+x$1(d, i, data), +y$1(d, i, data));
-    }
-    if (buffer)
-      return output = null, buffer + "" || null;
-  }
-  line2.x = function(_) {
-    return arguments.length ? (x$1 = typeof _ === "function" ? _ : constant$1(+_), line2) : x$1;
-  };
-  line2.y = function(_) {
-    return arguments.length ? (y$1 = typeof _ === "function" ? _ : constant$1(+_), line2) : y$1;
-  };
-  line2.defined = function(_) {
-    return arguments.length ? (defined = typeof _ === "function" ? _ : constant$1(!!_), line2) : defined;
-  };
-  line2.curve = function(_) {
-    return arguments.length ? (curve = _, context != null && (output = curve(context)), line2) : curve;
-  };
-  line2.context = function(_) {
-    return arguments.length ? (_ == null ? context = output = null : output = curve(context = _), line2) : context;
-  };
-  return line2;
-}
-function setNumberOrNumberAccessor(func, value) {
-  if (typeof value === "number")
-    func(value);
-  else
-    func(value);
-}
-function line({ x: x2, y: y2, defined, curve } = {}) {
-  const path2 = d3Line();
-  if (x2)
-    setNumberOrNumberAccessor(path2.x, x2);
-  if (y2)
-    setNumberOrNumberAccessor(path2.y, y2);
-  if (defined)
-    path2.defined(defined);
-  if (curve)
-    path2.curve(curve);
-  return path2;
-}
-const _hoisted_1 = ["className", "d", "fill"];
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  props: {
-    data: null,
-    innerRef: null,
-    fill: { default: "transparent" },
-    className: null,
-    defined: { type: Function, default: () => true },
-    curve: null,
-    x: null,
-    y: null
-  },
-  setup(__props) {
-    const linePathProps = __props;
-    const path2 = computed(() => {
-      const x2 = linePathProps.x;
-      const y2 = linePathProps.y;
-      const defined = linePathProps.defined;
-      const curve = linePathProps.curve;
-      return line({ x: x2, y: y2, defined, curve });
-    });
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("path", mergeProps({
-        ref: linePathProps.innerRef,
-        className: linePathProps.className,
-        d: __props.data ? unref(path2)(__props.data) || "" : unref(path2)([]) || "",
-        fill: linePathProps.fill,
-        strokeLinecap: "round"
-      }, _ctx.$attrs), null, 16, _hoisted_1);
-    };
-  }
-});
+import { defineComponent, openBlock, createElementBlock, mergeProps, computed, unref, renderSlot, toDisplayString, createElementVNode, normalizeStyle, Fragment, renderList, createBlock, withCtx, createVNode } from "vue";
 function ascending(a, b) {
   return a == null || b == null ? NaN : a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
 }
@@ -983,7 +720,7 @@ define(Cubehelix, cubehelix$1, extend(Color, {
     return new Rgb(255 * (l + a * (A * cosh + B * sinh)), 255 * (l + a * (C * cosh + D * sinh)), 255 * (l + a * (E * cosh)), this.opacity);
   }
 }));
-var constant = (x2) => () => x2;
+var constant$1 = (x2) => () => x2;
 function linear$1(a, d) {
   return function(t) {
     return a + t * d;
@@ -996,16 +733,16 @@ function exponential(a, b, y2) {
 }
 function hue(a, b) {
   var d = b - a;
-  return d ? linear$1(a, d > 180 || d < -180 ? d - 360 * Math.round(d / 360) : d) : constant(isNaN(a) ? b : a);
+  return d ? linear$1(a, d > 180 || d < -180 ? d - 360 * Math.round(d / 360) : d) : constant$1(isNaN(a) ? b : a);
 }
 function gamma(y2) {
   return (y2 = +y2) === 1 ? nogamma : function(a, b) {
-    return b - a ? exponential(a, b, y2) : constant(isNaN(a) ? b : a);
+    return b - a ? exponential(a, b, y2) : constant$1(isNaN(a) ? b : a);
   };
 }
 function nogamma(a, b) {
   var d = b - a;
-  return d ? linear$1(a, d) : constant(isNaN(a) ? b : a);
+  return d ? linear$1(a, d) : constant$1(isNaN(a) ? b : a);
 }
 var interpolateRgb = function rgbGamma(y2) {
   var color2 = gamma(y2);
@@ -1125,7 +862,7 @@ function string(a, b) {
 }
 function interpolate(a, b) {
   var t = typeof b, c;
-  return b == null || t === "boolean" ? constant(b) : (t === "number" ? interpolateNumber : t === "string" ? (c = color(b)) ? (b = c, interpolateRgb) : string : b instanceof color ? interpolateRgb : b instanceof Date ? date$1 : isNumberArray(b) ? numberArray : Array.isArray(b) ? genericArray : typeof b.valueOf !== "function" && typeof b.toString !== "function" || isNaN(b) ? object : interpolateNumber)(a, b);
+  return b == null || t === "boolean" ? constant$1(b) : (t === "number" ? interpolateNumber : t === "string" ? (c = color(b)) ? (b = c, interpolateRgb) : string : b instanceof color ? interpolateRgb : b instanceof Date ? date$1 : isNumberArray(b) ? numberArray : Array.isArray(b) ? genericArray : typeof b.valueOf !== "function" && typeof b.toString !== "function" || isNaN(b) ? object : interpolateNumber)(a, b);
 }
 function interpolateRound(a, b) {
   return a = +a, b = +b, function(t) {
@@ -2935,4 +2672,536 @@ const updateUtcScale = scaleOperator("domain", "range", "reverse", "clamp", "int
 function createUtcScale(config) {
   return updateUtcScale(utcTime(), config);
 }
-export { _sfc_main$2 as Bar, _sfc_main$1 as Circle, _sfc_main$3 as Group, _sfc_main as LinePath, createBandScale as scaleBand, createLinearScale as scaleLinear, createLogScale as scaleLog, createOrdinalScale as scaleOrdinal, createQuantileScale as scaleQuantile, createThresholdScale as scaleThreshold, createTimeScale as scaleTime, createUtcScale as scaleUtc };
+const pi = Math.PI, tau = 2 * pi, epsilon = 1e-6, tauEpsilon = tau - epsilon;
+function Path() {
+  this._x0 = this._y0 = this._x1 = this._y1 = null;
+  this._ = "";
+}
+function path() {
+  return new Path();
+}
+Path.prototype = path.prototype = {
+  constructor: Path,
+  moveTo: function(x2, y2) {
+    this._ += "M" + (this._x0 = this._x1 = +x2) + "," + (this._y0 = this._y1 = +y2);
+  },
+  closePath: function() {
+    if (this._x1 !== null) {
+      this._x1 = this._x0, this._y1 = this._y0;
+      this._ += "Z";
+    }
+  },
+  lineTo: function(x2, y2) {
+    this._ += "L" + (this._x1 = +x2) + "," + (this._y1 = +y2);
+  },
+  quadraticCurveTo: function(x1, y1, x2, y2) {
+    this._ += "Q" + +x1 + "," + +y1 + "," + (this._x1 = +x2) + "," + (this._y1 = +y2);
+  },
+  bezierCurveTo: function(x1, y1, x2, y2, x3, y3) {
+    this._ += "C" + +x1 + "," + +y1 + "," + +x2 + "," + +y2 + "," + (this._x1 = +x3) + "," + (this._y1 = +y3);
+  },
+  arcTo: function(x1, y1, x2, y2, r) {
+    x1 = +x1, y1 = +y1, x2 = +x2, y2 = +y2, r = +r;
+    var x0 = this._x1, y0 = this._y1, x21 = x2 - x1, y21 = y2 - y1, x01 = x0 - x1, y01 = y0 - y1, l01_2 = x01 * x01 + y01 * y01;
+    if (r < 0)
+      throw new Error("negative radius: " + r);
+    if (this._x1 === null) {
+      this._ += "M" + (this._x1 = x1) + "," + (this._y1 = y1);
+    } else if (!(l01_2 > epsilon))
+      ;
+    else if (!(Math.abs(y01 * x21 - y21 * x01) > epsilon) || !r) {
+      this._ += "L" + (this._x1 = x1) + "," + (this._y1 = y1);
+    } else {
+      var x20 = x2 - x0, y20 = y2 - y0, l21_2 = x21 * x21 + y21 * y21, l20_2 = x20 * x20 + y20 * y20, l21 = Math.sqrt(l21_2), l01 = Math.sqrt(l01_2), l = r * Math.tan((pi - Math.acos((l21_2 + l01_2 - l20_2) / (2 * l21 * l01))) / 2), t01 = l / l01, t21 = l / l21;
+      if (Math.abs(t01 - 1) > epsilon) {
+        this._ += "L" + (x1 + t01 * x01) + "," + (y1 + t01 * y01);
+      }
+      this._ += "A" + r + "," + r + ",0,0," + +(y01 * x20 > x01 * y20) + "," + (this._x1 = x1 + t21 * x21) + "," + (this._y1 = y1 + t21 * y21);
+    }
+  },
+  arc: function(x2, y2, r, a0, a1, ccw) {
+    x2 = +x2, y2 = +y2, r = +r, ccw = !!ccw;
+    var dx = r * Math.cos(a0), dy = r * Math.sin(a0), x0 = x2 + dx, y0 = y2 + dy, cw = 1 ^ ccw, da = ccw ? a0 - a1 : a1 - a0;
+    if (r < 0)
+      throw new Error("negative radius: " + r);
+    if (this._x1 === null) {
+      this._ += "M" + x0 + "," + y0;
+    } else if (Math.abs(this._x1 - x0) > epsilon || Math.abs(this._y1 - y0) > epsilon) {
+      this._ += "L" + x0 + "," + y0;
+    }
+    if (!r)
+      return;
+    if (da < 0)
+      da = da % tau + tau;
+    if (da > tauEpsilon) {
+      this._ += "A" + r + "," + r + ",0,1," + cw + "," + (x2 - dx) + "," + (y2 - dy) + "A" + r + "," + r + ",0,1," + cw + "," + (this._x1 = x0) + "," + (this._y1 = y0);
+    } else if (da > epsilon) {
+      this._ += "A" + r + "," + r + ",0," + +(da >= pi) + "," + cw + "," + (this._x1 = x2 + r * Math.cos(a1)) + "," + (this._y1 = y2 + r * Math.sin(a1));
+    }
+  },
+  rect: function(x2, y2, w, h) {
+    this._ += "M" + (this._x0 = this._x1 = +x2) + "," + (this._y0 = this._y1 = +y2) + "h" + +w + "v" + +h + "h" + -w + "Z";
+  },
+  toString: function() {
+    return this._;
+  }
+};
+function constant(x2) {
+  return function constant2() {
+    return x2;
+  };
+}
+function array(x2) {
+  return typeof x2 === "object" && "length" in x2 ? x2 : Array.from(x2);
+}
+function Linear(context) {
+  this._context = context;
+}
+Linear.prototype = {
+  areaStart: function() {
+    this._line = 0;
+  },
+  areaEnd: function() {
+    this._line = NaN;
+  },
+  lineStart: function() {
+    this._point = 0;
+  },
+  lineEnd: function() {
+    if (this._line || this._line !== 0 && this._point === 1)
+      this._context.closePath();
+    this._line = 1 - this._line;
+  },
+  point: function(x2, y2) {
+    x2 = +x2, y2 = +y2;
+    switch (this._point) {
+      case 0:
+        this._point = 1;
+        this._line ? this._context.lineTo(x2, y2) : this._context.moveTo(x2, y2);
+        break;
+      case 1:
+        this._point = 2;
+      default:
+        this._context.lineTo(x2, y2);
+        break;
+    }
+  }
+};
+function curveLinear(context) {
+  return new Linear(context);
+}
+function x(p) {
+  return p[0];
+}
+function y(p) {
+  return p[1];
+}
+function d3Line(x$1, y$1) {
+  var defined = constant(true), context = null, curve = curveLinear, output = null;
+  x$1 = typeof x$1 === "function" ? x$1 : x$1 === void 0 ? x : constant(x$1);
+  y$1 = typeof y$1 === "function" ? y$1 : y$1 === void 0 ? y : constant(y$1);
+  function line2(data) {
+    var i, n = (data = array(data)).length, d, defined0 = false, buffer;
+    if (context == null)
+      output = curve(buffer = path());
+    for (i = 0; i <= n; ++i) {
+      if (!(i < n && defined(d = data[i], i, data)) === defined0) {
+        if (defined0 = !defined0)
+          output.lineStart();
+        else
+          output.lineEnd();
+      }
+      if (defined0)
+        output.point(+x$1(d, i, data), +y$1(d, i, data));
+    }
+    if (buffer)
+      return output = null, buffer + "" || null;
+  }
+  line2.x = function(_) {
+    return arguments.length ? (x$1 = typeof _ === "function" ? _ : constant(+_), line2) : x$1;
+  };
+  line2.y = function(_) {
+    return arguments.length ? (y$1 = typeof _ === "function" ? _ : constant(+_), line2) : y$1;
+  };
+  line2.defined = function(_) {
+    return arguments.length ? (defined = typeof _ === "function" ? _ : constant(!!_), line2) : defined;
+  };
+  line2.curve = function(_) {
+    return arguments.length ? (curve = _, context != null && (output = curve(context)), line2) : curve;
+  };
+  line2.context = function(_) {
+    return arguments.length ? (_ == null ? context = output = null : output = curve(context = _), line2) : context;
+  };
+  return line2;
+}
+function setNumberOrNumberAccessor(func, value) {
+  if (typeof value === "number")
+    func(value);
+  else
+    func(value);
+}
+function line({ x: x2, y: y2, defined, curve } = {}) {
+  const path2 = d3Line();
+  if (x2)
+    setNumberOrNumberAccessor(path2.x, x2);
+  if (y2)
+    setNumberOrNumberAccessor(path2.y, y2);
+  if (defined)
+    path2.defined(defined);
+  if (curve)
+    path2.curve(curve);
+  return path2;
+}
+const _sfc_main$8 = /* @__PURE__ */ defineComponent({
+  props: {
+    class: null
+  },
+  setup(__props) {
+    const barProps = __props;
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("rect", mergeProps({
+        class: barProps.class
+      }, _ctx.$attrs), null, 16);
+    };
+  }
+});
+const _hoisted_1$2 = ["className", "d", "fill"];
+const _sfc_main$7 = /* @__PURE__ */ defineComponent({
+  props: {
+    data: null,
+    innerRef: null,
+    fill: { default: "transparent" },
+    className: null,
+    defined: { type: Function, default: () => true },
+    curve: null,
+    x: null,
+    y: null
+  },
+  setup(__props) {
+    const linePathProps = __props;
+    const path2 = computed(() => {
+      const x2 = linePathProps.x;
+      const y2 = linePathProps.y;
+      const defined = linePathProps.defined;
+      const curve = linePathProps.curve;
+      return line({ x: x2, y: y2, defined, curve });
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("path", mergeProps({
+        ref: linePathProps.innerRef,
+        className: linePathProps.className,
+        d: __props.data ? unref(path2)(__props.data) || "" : unref(path2)([]) || "",
+        fill: linePathProps.fill,
+        strokeLinecap: "round"
+      }, _ctx.$attrs), null, 16, _hoisted_1$2);
+    };
+  }
+});
+const _sfc_main$6 = /* @__PURE__ */ defineComponent({
+  props: {
+    class: null
+  },
+  setup(__props) {
+    const circleProps = __props;
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("circle", mergeProps({
+        class: circleProps.class
+      }, _ctx.$attrs), null, 16);
+    };
+  }
+});
+function defaultDomain({
+  steps,
+  scale
+}) {
+  const domain = scale.domain();
+  const increment = (domain[domain.length - 1] - domain[0]) / (steps - 1);
+  const result = new Array(5);
+  result[0] = domain[0];
+  for (let i = 1; i < steps; i++) {
+    result[i] = result[i - 1] + increment;
+  }
+  return result;
+}
+function labelTransformFactory({
+  scale,
+  labelFormat
+}) {
+  return (d, i) => ({
+    datum: d,
+    index: i,
+    text: `${labelFormat(d, i)}`,
+    value: scale(d)
+  });
+}
+function valueOrIdentity(_) {
+  if (_ && typeof _ === "object" && "value" in _ && typeof _.value !== "undefined")
+    return _.value;
+  return _;
+}
+function valueOrIdentityString(_) {
+  return String(valueOrIdentity(_));
+}
+const _sfc_main$5 = /* @__PURE__ */ defineComponent({
+  props: {
+    flexDirection: { default: "row" },
+    alignItems: { default: "center" },
+    margin: { default: "0" },
+    display: { default: "flex" }
+  },
+  setup(__props) {
+    const legendItemProps = __props;
+    const styleObject = computed(() => {
+      const { flexDirection, alignItems, margin, display } = legendItemProps;
+      return {
+        flexDirection,
+        alignItems,
+        margin,
+        display
+      };
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", mergeProps({
+        class: "vuenique-legend-item",
+        style: unref(styleObject)
+      }, _ctx.$attrs), [
+        renderSlot(_ctx.$slots, "default")
+      ], 16);
+    };
+  }
+});
+const _sfc_main$4 = /* @__PURE__ */ defineComponent({
+  props: {
+    align: { default: "left" },
+    label: null,
+    flex: { default: 1 },
+    margin: { default: "5px 0" },
+    children: null
+  },
+  setup(__props) {
+    const legendLabelProps = __props;
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", mergeProps({ className: "legendLabels" }, _ctx.$attrs, {
+        style: {
+          justifyContent: legendLabelProps.align,
+          display: "flex",
+          flex: legendLabelProps.flex,
+          margin: legendLabelProps.margin
+        }
+      }), toDisplayString(legendLabelProps.label), 17);
+    };
+  }
+});
+const _hoisted_1$1 = {
+  width: 10,
+  height: 10
+};
+const _hoisted_2 = ["width", "height", "fill"];
+const _hoisted_3 = ["v-bind"];
+const _hoisted_4 = {
+  width: 10,
+  height: 10
+};
+const _hoisted_5 = ["r", "fill"];
+const _sfc_main$3 = /* @__PURE__ */ defineComponent({
+  props: {
+    label: null,
+    itemIndex: null,
+    margin: { default: 5 },
+    fill: null,
+    shape: { default: "rect" },
+    width: { default: "10" },
+    height: { default: "10" },
+    radius: { default: "5" }
+  },
+  setup(__props) {
+    const legendShapeProps = __props;
+    const labelFill = computed(() => {
+      const { fill, label } = legendShapeProps;
+      return fill(__spreadValues({}, label));
+    });
+    return (_ctx, _cache) => {
+      return legendShapeProps.shape === "rect" ? (openBlock(), createElementBlock("div", mergeProps({
+        key: 0,
+        className: "legendShape"
+      }, _ctx.$attrs), [
+        (openBlock(), createElementBlock("svg", _hoisted_1$1, [
+          createElementVNode("rect", {
+            width: legendShapeProps.width,
+            height: legendShapeProps.height,
+            fill: unref(labelFill)
+          }, null, 8, _hoisted_2)
+        ]))
+      ], 16)) : (openBlock(), createElementBlock("div", {
+        key: 1,
+        className: "legendShape",
+        "v-bind": _ctx.$attrs
+      }, [
+        (openBlock(), createElementBlock("svg", _hoisted_4, [
+          createElementVNode("circle", {
+            cx: 5,
+            cy: 5,
+            r: legendShapeProps.radius,
+            fill: unref(labelFill)
+          }, null, 8, _hoisted_5)
+        ]))
+      ], 8, _hoisted_3));
+    };
+  }
+});
+const _sfc_main$2 = /* @__PURE__ */ defineComponent({
+  props: {
+    scale: null,
+    style: { default: {
+      display: "flex"
+    } },
+    domain: null,
+    shapeWidth: { default: 15 },
+    shapeHeight: { default: 15 },
+    shapeMargin: { default: "2px 4px 2px 0" },
+    labelAlign: { default: "left" },
+    labelFlex: { default: "1" },
+    labelMargin: { default: "0 4px" },
+    itemMargin: { default: "0" },
+    direction: { default: "column" },
+    itemDirection: { default: "row" },
+    fill: { type: Function, default: valueOrIdentityString },
+    size: { type: Function, default: valueOrIdentityString },
+    shape: { default: "circle" },
+    shapeStyle: null,
+    labelFormat: { type: Function, default: valueOrIdentity },
+    labelTransform: { type: Function, default: labelTransformFactory },
+    legendLabelProps: null
+  },
+  setup(__props) {
+    const legendProps = __props;
+    const domain = legendProps.domain || [];
+    const labels = computed(() => {
+      const { scale, labelFormat, labelTransform } = legendProps;
+      const labelFormatter = labelTransform({ scale, labelFormat });
+      return domain.map(labelFormatter);
+    });
+    const legendLabels = computed(() => {
+      return labels.value.map((label, i) => {
+        const key = `legend-${label.text}-${i}`;
+        const item = domain[i];
+        const itemIndex = i;
+        return {
+          key,
+          item,
+          itemIndex,
+          label
+        };
+      });
+    });
+    const styleObject = computed(() => {
+      const { style, direction } = legendProps;
+      return __spreadProps(__spreadValues({}, style), {
+        direction
+      });
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", {
+        class: "vuenique-legend",
+        style: normalizeStyle(unref(styleObject).value)
+      }, [
+        (openBlock(true), createElementBlock(Fragment, null, renderList(unref(legendLabels), (legendItem) => {
+          return openBlock(), createBlock(_sfc_main$5, mergeProps({
+            key: legendItem.key,
+            margin: legendProps.itemMargin,
+            flexDirection: legendProps.itemDirection,
+            label: legendItem.label
+          }, _ctx.$attrs), {
+            default: withCtx(() => [
+              createVNode(_sfc_main$3, {
+                item: legendItem.item,
+                itemIndex: legendItem.itemIndex,
+                shape: legendProps.shape,
+                width: legendProps.shapeWidth,
+                height: legendProps.shapeHeight,
+                margin: legendProps.shapeMargin,
+                label: legendItem.label,
+                fill: legendProps.fill,
+                size: legendProps.size,
+                shapeStyle: legendProps.shapeStyle
+              }, null, 8, ["item", "itemIndex", "shape", "width", "height", "margin", "label", "fill", "size", "shapeStyle"]),
+              createVNode(_sfc_main$4, {
+                label: legendItem.label.text,
+                flex: legendProps.labelFlex,
+                margin: legendProps.labelMargin,
+                align: legendProps.labelAlign,
+                legendLabelProps: legendProps.legendLabelProps
+              }, null, 8, ["label", "flex", "margin", "align", "legendLabelProps"])
+            ]),
+            _: 2
+          }, 1040, ["margin", "flexDirection", "label"]);
+        }), 128))
+      ], 4);
+    };
+  }
+});
+const _sfc_main$1 = /* @__PURE__ */ defineComponent({
+  props: {
+    scale: null,
+    style: null,
+    domain: null,
+    shapeWidth: null,
+    shapeHeight: null,
+    shapeMargin: null,
+    labelAlign: null,
+    labelFlex: null,
+    labelMargin: null,
+    itemMargin: null,
+    direction: null,
+    itemDirection: null,
+    fill: null,
+    size: null,
+    shape: null,
+    shapeStyle: null,
+    labelFormat: null,
+    labelTransform: null,
+    legendLabelProps: null,
+    steps: { default: 5 }
+  },
+  setup(__props) {
+    const legendLinearProps = __props;
+    const domain = computed(() => {
+      if (legendLinearProps.domain)
+        return legendLinearProps.domain;
+      const { steps, scale } = legendLinearProps;
+      return defaultDomain({ steps, scale });
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(_sfc_main$2, mergeProps(_ctx.$attrs, {
+        scale: legendLinearProps.scale,
+        domain: unref(domain)
+      }), null, 16, ["scale", "domain"]);
+    };
+  }
+});
+const _hoisted_1 = ["transform"];
+const __default__ = {
+  inheritAttrs: true
+};
+const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({}, __default__), {
+  props: {
+    top: { default: 0 },
+    left: { default: 0 },
+    transform: null,
+    class: null,
+    innerRef: null
+  },
+  setup(__props) {
+    const groupProps = __props;
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("g", mergeProps({
+        ref: "groupProps.innerRef",
+        class: groupProps.class,
+        transform: groupProps.transform ? groupProps.transform : `translate(${groupProps.left}, ${groupProps.top})`
+      }, _ctx.$attrs), [
+        renderSlot(_ctx.$slots, "default")
+      ], 16, _hoisted_1);
+    };
+  }
+}));
+export { _sfc_main$8 as Bar, _sfc_main$6 as Circle, _sfc_main as Group, _sfc_main$2 as Legend, _sfc_main$5 as LegendItem, _sfc_main$4 as LegendLabel, _sfc_main$1 as LegendLinear, _sfc_main$3 as LegendShape, _sfc_main$7 as LinePath, line, createBandScale as scaleBand, createLinearScale as scaleLinear, createLogScale as scaleLog, createOrdinalScale as scaleOrdinal, createQuantileScale as scaleQuantile, createThresholdScale as scaleThreshold, createTimeScale as scaleTime, createUtcScale as scaleUtc, valueOrIdentity, valueOrIdentityString };

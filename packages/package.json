@@ -2,7 +2,8 @@
   "name": "@vueniquejs/vuenique",
   "version": "1.0.0",
   "description": "Low level visualization component library built for Vue",
-  "main": "index.js",
+  "main": "build/index.cjs.js",
+  "module": "build/index.es.js",
   "scripts": {
     "test": "npx vitest",
     "build": "npx tsc"
