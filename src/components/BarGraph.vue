@@ -1,7 +1,5 @@
 <script setup lang="tsx">
-import Bar from '../../packages/vuenique-shape/Bar.vue';
-import Group from '../../packages/vuenique-group/Group.vue';
-import { scaleBand, scaleLinear } from '../../packages/vuenique-scale/index';
+import { Bar, Group, scaleBand, scaleLinear } from '@vueniquejs/vuenique';
 import { ref, computed, Ref, reactive } from 'vue';
 
 //update to have BarGraphProps and defineProps so it's more ready to use, not relying on mock data in here

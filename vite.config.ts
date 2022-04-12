@@ -8,9 +8,9 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'packages/'),
+      entry: path.resolve(__dirname, 'packages/index.js'),
       // name: "MyLib",
-      fileName: (format) => `my-lib.${format}.js`,
+      fileName: (format) => `index.${format}.js`,
       formats: ["cjs", "es"],
     },
     rollupOptions: {
@@ -23,7 +23,7 @@ export default defineConfig({
         },
       },
     },
-    outDir: "packages/esm",
+    outDir: "packages/build",
   },
   plugins: [vue(), vueJsx()],
   resolve: {
