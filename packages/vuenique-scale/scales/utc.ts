@@ -1,21 +1,17 @@
-import { scaleUtc } from 'd3-scale';
-// import { DefaultOutput } from '../types/Base';
-// import { PickScaleConfigWithoutType } from '../types/ScaleConfig';
-import scaleOperator from '../operators/scaleOperator';
+import { scaleUtc } from "d3-scale";
+import scaleOperator from "../operators/scaleOperator";
 
+/** Returns applyOperator function */
 export const updateUtcScale = scaleOperator(
-  'domain',
-  'range',
-  'reverse',
-  'clamp',
-  'interpolate',
-  'nice',
-  'round',
+  "domain",
+  "range",
+  "reverse",
+  "clamp",
+  "interpolate",
+  "nice",
+  "round"
 );
 
-export default function createUtcScale(
-  config?: any,
-  //config?: PickScaleConfigWithoutType<'utc', Output>
-) {
+export default function createUtcScale(config?: any) {
   return updateUtcScale(scaleUtc(), config);
 }

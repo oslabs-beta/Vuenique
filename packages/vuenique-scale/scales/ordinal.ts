@@ -1,6 +1,7 @@
 import { scaleOrdinal } from "d3-scale";
-import scaleOperator from '../operators/scaleOperator';
+import scaleOperator from "../operators/scaleOperator";
 
+/** Returns applyOperator function */
 export const updateOrdinalScale = scaleOperator(
   "domain",
   "range",
