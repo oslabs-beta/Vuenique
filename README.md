@@ -139,5 +139,5 @@ Distributed under the MIT License.
    <li><a href="https://github.com/tmg2549">Trevor Gray</a></li>
 </ul>
 
-## Acknowledgements
+## Acknowledgments
 https://airbnb.io/visx
