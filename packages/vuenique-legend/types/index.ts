@@ -48,14 +48,7 @@ export type LegendProps = {
 export type LinearProps = LegendProps & { steps?: number };
 
 // shape types
-export type LegendShape =
-  | "rect"
-  | "circle"
-  | "line"
-  // | Vue.FunctionalComponent<RenderShapeProvidedProps<Data, Output>>
-  // | Vue.Component<RenderShapeProvidedProps<Data, Output>>;
-// | React.FC<RenderShapeProvidedProps<Data, Output>>
-// | React.ComponentClass<RenderShapeProvidedProps<Data, Output>>;
+export type LegendShape = "rect" | "circle" | "line";
 
 // label formatter function
 export type LabelFormatter<Datum> = (
@@ -71,7 +64,7 @@ export type FormattedLabel<Datum, Output, ExtraAttributes = {}> = {
   value?: Output;
 } & ExtraAttributes;
 
-//
+// renderShape props
 export type RenderShapeProvidedProps<Data, Output> = {
   width?: string | number;
   height?: string | number;
@@ -135,17 +128,6 @@ export type LegendShapeProps = {
   //shapeStyle?: any;
   // width?: string | number;
   // height?: string | number;
-  //EXPLAINER: commented out a bunch of visx stuff for the shape, since we will be doing just rect and circle for now
+  //EXPLAINER: removed a bunch of stuff for the shape, since we will be doing just rect and circle for now
   //we will be leveraging the svg defaults for these then
 };
-
-/******** not used ********/
-// export type LabelFormatterFactory<Scale extends AnyD3Scale> = (args: {
-//   scale: Scale;
-//   labelFormat: LabelFormatter<ScaleInput<Scale>>;
-// }) => ItemTransformer<ScaleInput<Scale>, ReturnType<Scale>>;
-
-// export type ItemTransformer<Datum, Output> = (
-//   item: Datum,
-//   itemIndex: number,
-// ) => FormattedLabel<Datum, Output>;

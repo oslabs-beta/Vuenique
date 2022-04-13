@@ -9,10 +9,6 @@ export type LegendLabelOwnProps = {
   children?: Vue.VNode;
 };
 
-// all legendLabel accepted props
-// type LegendLabelProps = LegendLabelOwnProps &
-//   Omit<Vue.HTMLAttributes, keyof LegendLabelOwnProps>;
-
 //possible way of immplementing children, but falling back to
 // <slot>"legendlabelProps.label"</slot>
 const legendLabelProps = withDefaults(defineProps<LegendLabelOwnProps>(), {

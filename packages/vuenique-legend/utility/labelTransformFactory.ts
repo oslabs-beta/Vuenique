@@ -1,11 +1,9 @@
-import type { LabelFormatter } from "../types";
-
 export default function labelTransformFactory({
   scale,
   labelFormat,
 }: {
-  scale: any,
-  labelFormat: any
+  scale: any;
+  labelFormat: any;
 }) {
   return (d, i) => ({
     datum: d,
