@@ -38,7 +38,7 @@
 <hr>
 
 ## Introduction
-Vuenique is a reusable component visualization library that brings the power of D3 and visx to Vue
+Vuenique is a reusable low-level component visualization library that brings the power of D3 and visx to Vue
 
 ## Installation
 Install with npm:
@@ -46,9 +46,7 @@ Install with npm:
 ```sh
 npm install @vueniquejs/vuenique
 ```
-<!-- ```js
-function () { return "This code is highlighted as Javascript!"}
-``` -->
+
 ## Getting Started
 
 1. Import the components you need from the package.
