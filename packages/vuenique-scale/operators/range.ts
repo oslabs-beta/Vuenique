@@ -1,14 +1,13 @@
-// import { DefaultThresholdInput, D3Scale } from '../types/Scale';
-// import { StringLike } from '../types/Base';
-// import { ScaleConfigWithoutType } from '../types/ScaleConfig';
-
+// set the range of the scale according to
+// the range property passed within config object
 export default function applyRange( scale: any, config: any ) {
   if (config.range) {
     if ('padding' in scale) {
-      // point and band scales
+      // config.domain will be type [number, number]
+      // this only apply to band scale
       scale.range(config.range as [number, number]);
     } else {
-      // the rest
+      // config.domain will have different type if there isn't a padding in scale
       scale.range(config.range);
     }
   }

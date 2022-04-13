@@ -14,13 +14,9 @@ import {
   utcMonth,
   utcYear,
   // CountableTimeInterval,
-} from 'd3-time';
-// import { ScaleTime } from 'd3-scale';
-// import { StringLike } from '../types/Base';
-// import { DefaultThresholdInput, D3Scale } from '../types/Scale';
-// import { ScaleConfigWithoutType } from '../types/ScaleConfig';
-// import { NiceTime } from '../types/Nice';
-import isUtcScale from '../utils/isUtcScale';
+} from "d3-time";
+
+import isUtcScale from "../utils/isUtcScale";
 
 const localTimeIntervals = {
   day: timeDay,
@@ -42,19 +38,28 @@ const utcIntervals = {
   year: utcYear,
 };
 
-export default function applyNice (scale: any, config: any,) {
-  if ('nice' in config && typeof config.nice !== 'undefined' && 'nice' in scale) {
+/** Operator function to apply the D3 nice method on different arguments dependent on the argument data type
+    
+    Refer to D3-Scale for more info on D3 interpolate method: {@link https://github.com/d3/d3-scale/}
+**/
+
+export default function applyNice(scale: any, config: any) {
+  if (
+    "nice" in config &&
+    typeof config.nice !== "undefined" &&
+    "nice" in scale
+  ) {
     const { nice } = config;
-    if (typeof nice === 'boolean') {
+    if (typeof nice === "boolean") {
       if (nice) {
         scale.nice();
       }
-    } else if (typeof nice === 'number') {
+    } else if (typeof nice === "number") {
       scale.nice(nice);
     } else {
       const timeScale = scale;
       const isUtc = isUtcScale(timeScale);
-      if (typeof nice === 'string') {
+      if (typeof nice === "string") {
         timeScale.nice(isUtc ? utcIntervals[nice] : localTimeIntervals[nice]);
       } else {
         const { interval, step } = nice;
