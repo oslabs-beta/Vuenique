@@ -1,11 +1,6 @@
-// import { ScaleTime } from 'd3-scale';
-// import { StringLike } from '../types/Base';
-// import { DefaultThresholdInput, D3Scale } from '../types/Scale';
-// import { ScaleType } from '../types/ScaleConfig';
 import isUtcScale from './isUtcScale';
 
-export default function inferScaleType(scale) {
-  // Try a sequence of typeguards to figure out the scale type
+export default function inferScaleType(scale) 
 
   if ('paddingInner' in scale) {
     return 'band';
@@ -49,3 +44,4 @@ export default function inferScaleType(scale) {
 
   return 'ordinal';
 }
+
