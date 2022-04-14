@@ -1,5 +1,5 @@
 {
-  "name": "vuez_npm_package",
+  "name": "vuenique",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",

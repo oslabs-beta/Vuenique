@@ -1,6 +1,6 @@
 {
   "name": "@vueniquejs/vuenique",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Low level visualization component library built for Vue",
   "main": "build/index.cjs.js",
   "module": "build/index.es.js",
