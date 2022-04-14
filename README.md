@@ -2,12 +2,27 @@
 <br/>
 <p align="center">
    <img src="./src/assets/logo_gradient.svg" alt="Logo" height="150">
-   <h3 align="center">Vuenique</h3>
+   <h1 align="center">Vuenique</h3>
+
    <p align="center">
       A low level visualization component library built for Vue
    </p>
 
    <!-- BADGES -->
+   <p align="center">
+    <!-- GITHUB RELEASE VERSION -->
+    <a href="https://github.com/oslabs-beta/Vuenique/releases"><img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/oslabs-beta/Vuenique?color=blueviolet"></a>
+    <!-- STARS -->
+    <a href="https://github.com/oslabs-beta/Vuenique/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/oslabs-beta/Vuenique?color=9cf"></a>
+    <!-- FORKS -->
+    <a href="https://github.com/oslabs-beta/Vuenique/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/oslabs-beta/Vuenique?color=orange"></a>
+    <br>
+    <!-- OPEN ISSUES -->
+    <a href="https://github.com/oslabs-beta/Vuenique/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/oslabs-beta/Vuenique?color=red"></a>
+    <!-- CONTRIBUTIONS -->
+    <img alt="Contributions welcome" src="https://img.shields.io/badge/contributions-welcome-brightgreen">
+
+   </p>
 </p>
 
 <hr>
