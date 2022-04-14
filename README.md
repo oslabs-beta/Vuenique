@@ -1,7 +1,7 @@
 <!-- HEADER -->
 <br/>
 <p align="center">
-   <img src="./src/assets/placeholderLogo.svg" alt="Logo" height="120">
+   <img src="./src/assets/logo_gradient.svg" alt="Logo" height="150">
    <h3 align="center">Vuenique</h3>
    <p align="center">
       A low level visualization component library built for Vue
