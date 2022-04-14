@@ -6,8 +6,6 @@ export default {
 </script>
 
 <script setup lang="ts">
-import type { Ref } from "vue";
-
 // Type declarations for <g> tag
 interface GroupProps {
   // top offset for <g> tag
@@ -18,8 +16,6 @@ interface GroupProps {
   transform?: string;
   // render class attributes for <g> tag
   class?: string;
-  // reference to underlying <g> tag
-  innerRef?: Ref<SVGElement>;
 }
 // default values for top and left
 const groupProps = withDefaults(defineProps<GroupProps>(), {
@@ -31,7 +27,6 @@ const groupProps = withDefaults(defineProps<GroupProps>(), {
 <template>
   <!-- $attrs handle additional props not explicity defined in the interface GroupProps -->
   <g
-    ref="groupProps.innerRef"
     :class="groupProps.class"
     :transform="
       groupProps.transform
