@@ -1,16 +1,12 @@
-<!-- may need to move this to where the svg element lives later -->
 <script lang="ts">
-import { toRefs } from 'vue';
 export default {
-  // Prevent the root element from inheriting the fallthrough attributes if set false'
+  // Prevent the root element from inheriting the fallthrough attributes if set false
   inheritAttrs: true,
 };
 </script>
 
 <script setup lang="ts">
-import type { Ref } from 'vue';
-import { useSlots, onMounted } from 'vue';
-import * as Vue from 'vue';
+import type { Ref } from "vue";
 
 // Type declarations for <g> tag
 interface GroupProps {
@@ -30,11 +26,6 @@ const groupProps = withDefaults(defineProps<GroupProps>(), {
   top: 0,
   left: 0,
 });
-
-// useSlots().default() gives us an array of default slots passed to this component from the parent template
-// const slots = useSlots().default()
-// console.log(slots)
-// console.log(Vue.isVNode(slots[0].children))
 </script>
 
 <template>
