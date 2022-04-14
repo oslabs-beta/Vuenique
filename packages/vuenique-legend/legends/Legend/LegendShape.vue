@@ -29,7 +29,7 @@ const labelFill = computed(() => {
 </script>
 
 <template>
-  <div
+  <g
     v-if="legendShapeProps.shape === 'rect'"
     className="legendShape"
     v-bind="$attrs"
@@ -41,12 +41,12 @@ const labelFill = computed(() => {
         :fill="labelFill"
       />
     </svg>
-  </div>
-  <div v-else className="legendShape" :v-bind="$attrs">
+  </g>
+  <g v-else className="legendShape" :v-bind="$attrs">
     <svg :width="10" :height="10">
       <circle :cx="5" :cy="5" :r="legendShapeProps.radius" :fill="labelFill" />
     </svg>
-  </div>
+  </g>
   <!-- need to pass correct info for if it is rect or circle-->
   <!-- v-if?; rect would need height, width, circle would need radius-->
 </template>

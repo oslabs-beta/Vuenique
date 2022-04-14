@@ -119,7 +119,7 @@ const styleObject = computed(() => {
 </script>
 
 <template>
-  <div class="vuenique-legend" :style="styleObject.value">
+  <g class="vuenique-legend" :style="styleObject.value">
     <LegendItem
       v-for="legendItem in legendLabels"
       :key="legendItem.key"
@@ -148,7 +148,7 @@ const styleObject = computed(() => {
         :legendLabelProps="legendProps.legendLabelProps"
       />
     </LegendItem>
-  </div>
+  </g>
 </template>
 
 <style></style>

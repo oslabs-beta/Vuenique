@@ -18,7 +18,7 @@ const legendLabelProps = withDefaults(defineProps<LegendLabelOwnProps>(), {
 });
 </script>
 <template>
-  <div
+  <text
     className="legendLabels"
     v-bind="$attrs"
     :style="{
@@ -29,5 +29,5 @@ const legendLabelProps = withDefaults(defineProps<LegendLabelOwnProps>(), {
     }"
   >
     {{ legendLabelProps.label }}
-  </div>
+  </text>
 </template>
