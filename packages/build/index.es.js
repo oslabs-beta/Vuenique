@@ -2840,7 +2840,12 @@ function setNumberOrNumberAccessor(func, value) {
   else
     func(value);
 }
-function line({ x: x2, y: y2, defined, curve } = {}) {
+function line({
+  x: x2,
+  y: y2,
+  defined,
+  curve
+} = {}) {
   const path2 = d3Line();
   if (x2)
     setNumberOrNumberAccessor(path2.x, x2);
@@ -2869,7 +2874,6 @@ const _hoisted_1$2 = ["className", "d", "fill"];
 const _sfc_main$7 = /* @__PURE__ */ defineComponent({
   props: {
     data: null,
-    innerRef: null,
     fill: { default: "transparent" },
     className: null,
     defined: { type: Function, default: () => true },
@@ -2888,7 +2892,6 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
     });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("path", mergeProps({
-        ref: linePathProps.innerRef,
         className: linePathProps.className,
         d: __props.data ? unref(path2)(__props.data) || "" : unref(path2)([]) || "",
         fill: linePathProps.fill,
@@ -2981,7 +2984,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const legendLabelProps = __props;
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", mergeProps({ className: "legendLabels" }, _ctx.$attrs, {
+      return openBlock(), createElementBlock("text", mergeProps({ className: "legendLabels" }, _ctx.$attrs, {
         style: {
           justifyContent: legendLabelProps.align,
           display: "flex",
@@ -3021,7 +3024,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
       return fill(__spreadValues({}, label));
     });
     return (_ctx, _cache) => {
-      return legendShapeProps.shape === "rect" ? (openBlock(), createElementBlock("div", mergeProps({
+      return legendShapeProps.shape === "rect" ? (openBlock(), createElementBlock("g", mergeProps({
         key: 0,
         className: "legendShape"
       }, _ctx.$attrs), [
@@ -3032,7 +3035,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
             fill: unref(labelFill)
           }, null, 8, _hoisted_2)
         ]))
-      ], 16)) : (openBlock(), createElementBlock("div", {
+      ], 16)) : (openBlock(), createElementBlock("g", {
         key: 1,
         className: "legendShape",
         "v-bind": _ctx.$attrs
@@ -3101,7 +3104,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       });
     });
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
+      return openBlock(), createElementBlock("g", {
         class: "vuenique-legend",
         style: normalizeStyle(unref(styleObject).value)
       }, [
@@ -3188,14 +3191,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent(__spreadProps(__spreadValues({
     top: { default: 0 },
     left: { default: 0 },
     transform: null,
-    class: null,
-    innerRef: null
+    class: null
   },
   setup(__props) {
     const groupProps = __props;
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("g", mergeProps({
-        ref: "groupProps.innerRef",
         class: groupProps.class,
         transform: groupProps.transform ? groupProps.transform : `translate(${groupProps.left}, ${groupProps.top})`
       }, _ctx.$attrs), [

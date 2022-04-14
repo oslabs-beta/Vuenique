@@ -31,9 +31,9 @@ const styleObject = computed(() => {
 </script>
 
 <template>
-  <g class="vuenique-legend-item" :style="styleObject" v-bind="$attrs">
+  <div class="vuenique-legend-item" :style="styleObject" v-bind="$attrs">
     <slot></slot>
-  </g>
+  </div>
 </template>
 
 <style></style>
